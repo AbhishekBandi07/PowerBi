@@ -1,52 +1,36 @@
+variables:
+- group: PowerBISecrets  # This should be the name of your variable group
+
 trigger:
   branches:
     include:
       - Test-1
 
-variables:
-  - group: Access for git
-
 pool:
   vmImage: 'windows-latest'
 
 steps:
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '6.x'
-
-- task: PowerShell@2
-  displayName: 'Install Power BI PowerShell Modules'
-  inputs:
-    targetType: 'inline'
-    script: |
-      Install-Module -Name MicrosoftPowerBIMgmt -Force -Scope CurrentUser -AllowClobber
-
 - task: PowerShell@2
   displayName: 'Deploy PBIX to Power BI Workspace'
   inputs:
     targetType: 'inline'
     script: |
-      $ErrorActionPreference = "Stop"
+      # Print for debug
+      Write-Host "Tenant: ${{ variables['PBI_TENANT_ID'] }}"
+      Write-Host "Workspace ID: ${{ variables['PBI_WORKSPACE_ID_Test'] }}"
 
-      $tenantId = "$(TENANT_ID)"
-      $clientId = "$(CLIENT_ID)"
-      $clientSecret = "$(CLIENT_SECRET)"
-      $workspaceName = "$(WORKSPACE_NAME)"
-      $pbixPath = "$(Build.SourcesDirectory)\Report.pbix"  # Update if file is in subfolder
-      $datasetName = "Healthcare Report"
+      # Assign from variables
+      $tenantId = "${{ variables['PBI_TENANT_ID'] }}"
+      $clientId = "${{ variables['PBI_CLIENT_ID'] }}"
+      $clientSecret = "${{ variables['PBI_CLIENT_SECRET'] }}"
+      $workspaceId = "${{ variables['PBI_WORKSPACE_ID_Test'] }}"  # <-- Test workspace
+      $pbixPath = "$(Build.SourcesDirectory)\Report.pbix"
+      $reportName = "Healthcare Report"
 
-      # Authenticate with Service Principal
-      $securePassword = ConvertTo-SecureString $clientSecret -AsPlainText -Force
-      $credential = New-Object System.Management.Automation.PSCredential($clientId, $securePassword)
+      # Authenticate
+      $secureSecret = ConvertTo-SecureString $clientSecret -AsPlainText -Force
+      $credential = New-Object System.Management.Automation.PSCredential($clientId, $secureSecret)
+      Connect-PowerBIServiceAccount -ServicePrincipal -Credential $credential -TenantId $tenantId
 
-      Connect-PowerBIServiceAccount -ServicePrincipal -Credential $credential -Tenant $tenantId
-
-      # Get Workspace
-      $workspace = Get-PowerBIWorkspace -Name $workspaceName
-      if (-not $workspace) {
-          throw "Workspace '$workspaceName' not found."
-      }
-
-      # Import PBIX
-      Import-PowerBIReport -Path $pbixPath -WorkspaceId $workspace.Id -Name $datasetName -ConflictAction CreateOrOverwrite
+      # Import report
+      Import-P
