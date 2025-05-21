@@ -1,0 +1,131 @@
+table DIM_ORDER_TIME
+	lineageTag: 08ddf258-088f-404c-97f5-5b3182d988da
+
+	column TIME_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 249824ff-279b-4eb9-acd0-9c8522a4547f
+		summarizeBy: none
+		sourceColumn: TIME_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_TIMESTAMP
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: a96d251f-dc0b-4e4b-9595-08109ec3a6e4
+		summarizeBy: none
+		sourceColumn: ORDER_TIMESTAMP
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DATE
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: fd2e6397-b038-466b-8713-3ac81fcff5d7
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DAY_OF_WEEK
+		dataType: string
+		sourceProviderType: nvarchar(3)
+		lineageTag: a4888ee5-e3ce-4eed-b6ed-adfc7bfe8bfa
+		summarizeBy: none
+		sourceColumn: DAY_OF_WEEK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_OF_MONTH
+		dataType: double
+		sourceProviderType: decimal(2, 0)
+		lineageTag: 831b0cff-31f1-44a0-aa78-4638b918ca53
+		summarizeBy: sum
+		sourceColumn: DAY_OF_MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WEEK_OF_YEAR
+		dataType: double
+		sourceProviderType: decimal(2, 0)
+		lineageTag: ae37f18a-0db4-4429-90ac-4feda1fac8bb
+		summarizeBy: sum
+		sourceColumn: WEEK_OF_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MONTH
+		dataType: double
+		sourceProviderType: decimal(2, 0)
+		lineageTag: a934b417-20a4-4057-80b9-44b5cd2771f0
+		summarizeBy: sum
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MONTH_NAME
+		dataType: string
+		sourceProviderType: nvarchar(3)
+		lineageTag: a5a6f8d7-b7ea-45ef-9279-eca8c7ad1ab1
+		summarizeBy: none
+		sourceColumn: MONTH_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTER
+		dataType: double
+		sourceProviderType: decimal(2, 0)
+		lineageTag: e8b3d1a6-8c15-4361-b550-5d6beace6bb2
+		summarizeBy: sum
+		sourceColumn: QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column YEAR
+		dataType: double
+		sourceProviderType: decimal(4, 0)
+		lineageTag: 3a489398-e92d-4864-8523-89f18517aee2
+		summarizeBy: none
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		sourceProviderType: nvarchar(128)
+		lineageTag: d6c9b277-136c-4219-923e-68afbfd0a4e6
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_ORDER_TIME = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("tzc61476.us-east-1.snowflakecomputing.com","POWERBI_WH",[Implementation="2.0"]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_ORDER_TIME_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_ORDER_TIME",Kind="Table"]}[Data]
+				in
+				    DIM_ORDER_TIME_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

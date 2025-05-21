@@ -1,0 +1,15 @@
+relationship 4813b83b-a4b2-4491-b868-20197e48fc7d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'LE - Submittal Report'.Month
+	toColumn: LocalDateTable_248e1ed8-232f-4f1e-9322-596f8185fef4.Date
+
+relationship a92a4406-8476-43bb-8270-a14b6a8d0e66
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'LE - Submittal Report'.'Submittal Modified Date'
+	toColumn: LocalDateTable_4fcdee78-8fc8-4a53-b273-3a738121df61.Date
+
+relationship e56ae41b-4860-43c6-bdf3-78aeb825f537
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'LE - Submittal Report'.'Month , Year'
+	toColumn: LocalDateTable_0747df8f-0baf-42d9-a49e-b3ad56301c72.Date
+

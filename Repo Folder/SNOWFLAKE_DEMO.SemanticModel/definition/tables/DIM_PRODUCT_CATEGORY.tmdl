@@ -1,0 +1,75 @@
+table DIM_PRODUCT_CATEGORY
+	lineageTag: 70e4fd9f-76fa-4b1d-a75f-66d1457a32cf
+
+	column PRODUCT_CATEGORY_NAME
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 7b219380-d1c5-4108-82b2-e478f3e7a0fa
+		summarizeBy: none
+		sourceColumn: PRODUCT_CATEGORY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ORDERS
+		dataType: double
+		sourceProviderType: decimal(18, 0)
+		lineageTag: ab3cc96e-46c2-4e1f-89b7-348e9e0b20e5
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_REVENUE
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 931107b7-ad9b-4ed8-a574-fb90dcd5e120
+		summarizeBy: sum
+		sourceColumn: TOTAL_REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_SHIPPING_CHARGES
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 7aef7db0-51c6-444a-addd-28d99a1dffb1
+		summarizeBy: sum
+		sourceColumn: AVERAGE_SHIPPING_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		sourceProviderType: nvarchar(128)
+		lineageTag: c9a56adc-2a89-40c9-8b84-7a75621e073c
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISPLAY_NAME = UPPER(SUBSTITUTE(DIM_PRODUCT_CATEGORY[PRODUCT_CATEGORY_NAME],"_"," "))
+		lineageTag: f8b72bfb-de59-4144-ac05-82a147d39ec9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PRODUCT_CATEGORY = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("tzc61476.us-east-1.snowflakecomputing.com","POWERBI_WH",[Implementation="2.0"]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_PRODUCT_CATEGORY_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_PRODUCT_CATEGORY",Kind="Table"]}[Data]
+				in
+				    DIM_PRODUCT_CATEGORY_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

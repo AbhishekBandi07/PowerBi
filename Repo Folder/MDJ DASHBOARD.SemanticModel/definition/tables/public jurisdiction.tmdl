@@ -1,0 +1,78 @@
+table 'public jurisdiction'
+	lineageTag: 27341b08-d3e6-4f31-9360-88d7f8a87164
+
+	column jurisdiction_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 777c6f5e-e8ab-4b69-811e-cc9b1cb9f075
+		summarizeBy: none
+		sourceColumn: jurisdiction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 94faa103-be19-43ee-bd74-9be9c5ed4862
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: c75feebd-43c9-41a4-9e20-02b1f60f51b1
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 4665b5f2-711d-4672-883f-c9d03656f64d
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: b2a5b5d9-dc66-4ac2-ba78-20d5d12e459f
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 39c73437-00dd-4793-92c9-1203340bd81e
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public jurisdiction' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_jurisdiction = Source{[Schema="public",Item="jurisdiction"]}[Data]
+				in
+				    public_jurisdiction
+
+	annotation PBI_ResultType = Table
+

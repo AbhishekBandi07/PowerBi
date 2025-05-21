@@ -1,0 +1,69 @@
+table DATA_MEASURES
+	lineageTag: 14a58bbc-d493-43ae-ac7a-81b2799e927f
+
+	measure REGULAR_DOCKETED-ORIGIN_OF_CASES = ```
+			
+			VAR SelectedDisplayName = SELECTEDVALUE('public values'[display_name])  -- Fiscal Year row
+			VAR SelectedCaseType = SELECTEDVALUE('public values'[value_case_type])  -- Case Type column
+			
+			-- Get UploadID and CategoryFiscalYearIDs from ACTIVITY_ACOM based on Fiscal Year
+			VAR UploadID = 
+			    CALCULATE(
+			        MAX('ACTIVITY_ACOM'[DataUploadIDs]),
+			        'ACTIVITY_ACOM'[FiscalYear] = SelectedDisplayName
+			    )
+			
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX('ACTIVITY_ACOM'[CategoryFiscalYearIDs]),
+			        'ACTIVITY_ACOM'[FiscalYear] = SelectedDisplayName
+			    )
+			VAR CategoryFYIDList = SUBSTITUTE(CategoryFYIDsString, ",", "|")
+			
+			-- Get correct value_id for this Fiscal Year & Case Type
+			VAR ValueID = 
+			    CALCULATE(
+			        MAX('public values'[value_id]),
+			        'public values'[display_name] = SelectedDisplayName &&
+			        'public values'[value_case_type] = SelectedCaseType
+			    )
+			
+			-- Final Measure Logic
+			RETURN
+			IF(
+			    NOT ISBLANK(ValueID),
+			    CALCULATE(
+			        SUM('public dashboard_data'[value]),
+			        'public dashboard_data'[is_active] = TRUE(),
+			        'public dashboard_data'[value_type_id] = 12,
+			        'public dashboard_data'[value_id] = ValueID,
+			        'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 9,
+			        'public dashboard_data'[data_upload_id] = FORMAT(UploadID, "0"),  -- compare as string
+			        CONTAINSSTRING(
+			            "|" & CategoryFYIDList & "|", 
+			            "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|"
+			        )
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: dc2d660d-b49d-4369-80f1-5ddfe4c8f5ee
+
+	column Column
+		formatString: 0
+		lineageTag: c79be327-56ca-4d9a-95eb-718a499bb195
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DATA_MEASURES = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = deb30026c7414230b99791a118b57bc1
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

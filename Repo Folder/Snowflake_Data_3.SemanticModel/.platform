@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Snowflake_Data_3"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "496b89fa-a870-835d-4e19-977bc458c32c"
+  }
+}

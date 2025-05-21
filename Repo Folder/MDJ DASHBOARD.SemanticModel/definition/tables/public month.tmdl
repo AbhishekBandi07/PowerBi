@@ -1,0 +1,78 @@
+table 'public month'
+	lineageTag: 6cd02c86-b38d-4b95-9615-acfc28fd78c7
+
+	column month_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 131eb86d-aa3c-4f7b-ad14-05c67edddce9
+		summarizeBy: none
+		sourceColumn: month_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: f2e9b497-361c-4c20-a27e-07db1168e6e2
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 9ec364a4-9824-4ad0-a037-7907be70830a
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 9145b5cc-c9fe-488f-86e5-f88f4f471b23
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 049c3316-f459-4b98-8194-2b530581c7f3
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 5627a618-fac6-43ef-8dac-f79d1916586a
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public month' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_month = Source{[Schema="public",Item="month"]}[Data]
+				in
+				    public_month
+
+	annotation PBI_ResultType = Table
+

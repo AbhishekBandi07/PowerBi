@@ -1,0 +1,137 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "dim_product_category.display_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DIM_PRODUCT_CATEGORY",
+			          "ConceptualProperty": "DISPLAY_NAME"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "CATEGORY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_customer_location.customer_state": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DIM_CUSTOMER_LOCATION",
+			          "ConceptualProperty": "CUSTOMER_STATE"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "STATE/CITY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_order_analysis.total_revenue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FACT_ORDER_ANALYSIS",
+			          "ConceptualProperty": "TOTAL_REVENUE"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "TOTAL REVENUE": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_order_analysis.last_year_revenue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FACT_ORDER_ANALYSIS",
+			          "ConceptualProperty": "LAST_YEAR_REVENUE"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "LAST YEAR REVENUE": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_order_analysis.total_orders": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FACT_ORDER_ANALYSIS",
+			          "ConceptualProperty": "TOTAL_ORDERS"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "TOTAL ORDERS": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_order_analysis.last_year_orders": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FACT_ORDER_ANALYSIS",
+			          "ConceptualProperty": "LAST_YEAR_ORDERS"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "LAST YEAR ORDERS": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

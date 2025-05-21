@@ -1,0 +1,102 @@
+table 'public variable_filing_by_mapping'
+	lineageTag: d80702d3-190f-49b4-80cb-fc282178e8f6
+
+	column variable_filing_by_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9456a430-9c06-4333-8774-219d5978c8b6
+		summarizeBy: sum
+		sourceColumn: variable_filing_by_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column filter_filing_by_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8d99acfa-f81e-4568-9986-0899e55ea7fb
+		summarizeBy: sum
+		sourceColumn: filter_filing_by_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column view_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ecf62b30-53cc-49fe-83bf-1d9e7b547c2b
+		summarizeBy: sum
+		sourceColumn: view_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_case_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c659f784-ebbb-4d0a-a299-2da2ab914c9d
+		summarizeBy: none
+		sourceColumn: court_case_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 62e6869f-dbce-46e1-ae7f-54ce269e3723
+		summarizeBy: none
+		sourceColumn: variable_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 000e91a5-115b-44a2-aa74-3035e97f6cd0
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: f0da3bdd-64e1-4025-bcad-c143237f5b0f
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 8b775627-a806-49d1-99d6-da45e70d9036
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public variable_filing_by_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_variable_filing_by_mapping = Source{[Schema="public",Item="variable_filing_by_mapping"]}[Data]
+				in
+				    public_variable_filing_by_mapping
+
+	annotation PBI_ResultType = Table
+

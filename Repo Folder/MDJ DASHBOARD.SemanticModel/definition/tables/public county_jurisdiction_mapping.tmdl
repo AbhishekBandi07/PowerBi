@@ -1,0 +1,80 @@
+table 'public county_jurisdiction_mapping'
+	lineageTag: 9bd7f792-c292-445b-b0bf-dbb612cf3445
+
+	column county_jurisdiction_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 155d9cb1-1b8a-4efe-8f53-8e1696a19d6a
+		summarizeBy: none
+		sourceColumn: county_jurisdiction_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column county_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ea57b470-de5c-4968-850e-ebd49736432d
+		summarizeBy: none
+		sourceColumn: county_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column jurisdiction_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ee705ca5-ff33-42f4-8a65-60578f8c246b
+		summarizeBy: none
+		sourceColumn: jurisdiction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 703fd6c4-403b-43f3-ac48-760c6d33a099
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 3635d1f4-6e2f-4ec5-8ddb-94928b0fb83a
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 8ab4c2e1-301a-4190-adf8-9527bc8f1c3f
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public county_jurisdiction_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_county_jurisdiction_mapping = Source{[Schema="public",Item="county_jurisdiction_mapping"]}[Data]
+				in
+				    public_county_jurisdiction_mapping
+
+	annotation PBI_ResultType = Table
+

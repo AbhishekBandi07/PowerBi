@@ -1,0 +1,206 @@
+table 'public dashboard_data'
+	lineageTag: 11dd8f36-98cd-48d6-94b7-c1160d0a79c6
+
+	measure Measure = CALCULATE(SUM('public dashboard_data'[value]),'public value_type'[value_type_id]=1)
+		formatString: 0
+		lineageTag: 636419d5-f8ce-485d-ad0f-0275e4334ccb
+
+	column dashboard_data_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6374e27b-3130-4b45-8f3e-5fd624152e38
+		summarizeBy: sum
+		sourceColumn: dashboard_data_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_case_type_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d7c773b2-d06d-4ee7-92ba-d3699596fa1f
+		summarizeBy: sum
+		sourceColumn: court_case_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column county_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ce61e1ae-17ab-4f12-9f89-89d7165a549a
+		summarizeBy: none
+		sourceColumn: county_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_fiscal_year_mapping_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2839b754-eab7-45b9-a0e6-043a1cc4da0c
+		summarizeBy: none
+		sourceColumn: court_fiscal_year_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: e81c5f95-3800-4071-81d2-d86fae8cb8b4
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: b8b995f0-ad0e-4a93-95fc-3083990ffdd7
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 0c8a7bfc-708f-4a1d-b52e-7df576d5f0a4
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d739313e-9eb7-45fe-9a0f-ba845ef016d8
+		summarizeBy: none
+		sourceColumn: value_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_upload_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a6faad51-4ed2-4775-9da7-014464f5b257
+		summarizeBy: none
+		sourceColumn: data_upload_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 240fcc78-1908-44e4-9016-1f5bd368c480
+		summarizeBy: none
+		sourceColumn: value_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_fiscal_year_month_mapping_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4a469e74-6751-4c33-8ef3-b297b4680346
+		summarizeBy: sum
+		sourceColumn: category_fiscal_year_month_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_fiscal_year_mapping_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3ab98f4b-f8e3-4d25-b683-680f3e17a0a4
+		summarizeBy: none
+		sourceColumn: category_fiscal_year_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 406520bb-a1db-4907-b228-36a802470a61
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		sourceProviderType: nchar
+		lineageTag: 6a32ca43-e72f-431e-ac3a-008aeae3036c
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active1
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 7f122419-0acb-435a-87a4-7f9189bacff7
+		summarizeBy: none
+		sourceColumn: is_active1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'public.category_fiscal_year_mapping.category_id'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: dfb38f69-02a9-45fe-8839-36a2e8e321c7
+		summarizeBy: sum
+		sourceColumn: public.category_fiscal_year_mapping.category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column = RELATED('public district'[display_name])
+		lineageTag: 41ddeabb-31a5-453a-989c-e06d4262cf19
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category Fiscal year' = RELATED('public category_fiscal_year_mapping'[fiscal_year])
+		formatString: 0
+		lineageTag: 362ea014-a1d8-4f9a-b800-effe48aa25c0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category_Name = RELATED('public category'[display_name])
+		lineageTag: 558ce1bb-fea6-455f-b0d9-dbc32b834db3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public dashboard_data' = m
+		mode: directQuery
+		source =
+				let
+				    Source = Value.NativeQuery(PostgreSQL.Database("localhost:5432", "Power Bi", [CreateNavigationProperties=false]), "SELECT #(lf)    d.*, #(lf)    CAST(d.value AS INTEGER) AS value_integer,  -- Convert text to integer#(lf)    u.status AS status,#(lf)    u.is_active AS is_active1,#(lf)    c.category_id#(lf)FROM #(lf)    dashboard_data AS d#(lf)LEFT JOIN data_upload AS u #(lf)    ON d.data_upload_id = u.data_upload_id#(lf)LEFT JOIN category_fiscal_year_mapping AS c #(lf)    ON d.category_fiscal_year_mapping_id = c.category_fiscal_year_mapping_id#(lf)", null, [EnableFolding=true]),
+				    #"Renamed Columns" = Table.RenameColumns(Source,{{"category_id", "public.category_fiscal_year_mapping.category_id"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"value"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"value_integer", "value"}})
+				in
+				    #"Renamed Columns1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

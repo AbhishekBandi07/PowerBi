@@ -1,0 +1,88 @@
+table 'public district'
+	lineageTag: 36608708-5fae-49ce-9f8f-b27e28d9d30f
+
+	column district_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a15d07ee-812d-4804-b664-932165fda3cb
+		summarizeBy: none
+		sourceColumn: district_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 78f3b499-aa19-4a1d-95ea-122a24075b46
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: ae00d37b-1b74-4d32-8c63-6fe58653391b
+		summarizeBy: none
+		sourceColumn: display_name
+		sortByColumn: district_id
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: dcb8a9fd-077f-4879-a391-cd42b380dceb
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 4585ee87-b7bd-4c5d-aa0e-f512c7e3d952
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: f0c568f3-0d24-429b-852f-fddd729444cb
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'display_name Hierarchy'
+		lineageTag: d65c0baa-c175-4a07-968b-f4511e24feab
+
+		level display_name
+			lineageTag: a41b64cd-08f2-4337-ae9b-ddf12337a92f
+			column: display_name
+
+	partition 'public district' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_district = Source{[Schema="public",Item="district"]}[Data]
+				in
+				    public_district
+
+	annotation PBI_ResultType = Table
+

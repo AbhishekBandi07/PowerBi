@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "MDJ DASHBOARD"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "02a71cf8-a062-9d13-44c3-cf7bc054adc0"
+  }
+}

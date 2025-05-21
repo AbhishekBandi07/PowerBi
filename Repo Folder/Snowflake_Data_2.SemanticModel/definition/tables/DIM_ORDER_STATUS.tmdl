@@ -1,0 +1,80 @@
+table DIM_ORDER_STATUS
+	lineageTag: 34ffec31-e930-4686-bec3-51251f24d8c4
+
+	column ORDER_ID
+		dataType: string
+		lineageTag: c8c436a5-c248-4ae6-86a0-e58d5c859a1f
+		summarizeBy: none
+		sourceColumn: ORDER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_STATUS_CATEGORY
+		dataType: string
+		lineageTag: 682c0171-549e-453e-9462-1211d70582e7
+		summarizeBy: none
+		sourceColumn: ORDER_STATUS_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_PURCHASE_TIMESTAMP
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f923e325-4b48-4b63-ac0e-b6477c224a7e
+		summarizeBy: none
+		sourceColumn: ORDER_PURCHASE_TIMESTAMP
+
+		variation Variation
+			isDefault
+			relationship: d1cb9ab6-e55e-48a2-a222-ed159959da62
+			defaultHierarchy: LocalDateTable_8bfdd4df-cb4e-47ef-8e1d-770325250b9b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_APPROVED_AT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ab718854-62aa-4f11-bf7a-6d5bd3bd5d3a
+		summarizeBy: none
+		sourceColumn: ORDER_APPROVED_AT
+
+		variation Variation
+			isDefault
+			relationship: 64a1c73f-2753-4a87-b26a-bbc506831a9a
+			defaultHierarchy: LocalDateTable_41f5ff49-478f-454e-b557-a407ab3f37a3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_PROCESSING_TIME
+		dataType: double
+		lineageTag: 7aa4184e-3388-4d97-afd2-187f824fefb7
+		summarizeBy: sum
+		sourceColumn: ORDER_PROCESSING_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: 3a4e4d42-d74c-4948-99c8-f7cf6c0a858f
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_ORDER_STATUS = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=E-Commerce Data", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    DBT_SSACHDEVA_ANALYTICS_Schema = CUSTOMERS_DB_Database{[Name="DBT_SSACHDEVA_ANALYTICS",Kind="Schema"]}[Data],
+				    DIM_ORDER_STATUS_Table = DBT_SSACHDEVA_ANALYTICS_Schema{[Name="DIM_ORDER_STATUS",Kind="Table"]}[Data]
+				in
+				    DIM_ORDER_STATUS_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

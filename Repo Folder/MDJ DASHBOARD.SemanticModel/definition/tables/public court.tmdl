@@ -1,0 +1,89 @@
+table 'public court'
+	lineageTag: 3bbf7767-f626-42a0-bf9e-d542e8b5994c
+
+	column court_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d7ea0cc5-d553-497d-a9ae-507329ad4686
+		summarizeBy: none
+		sourceColumn: court_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8143678f-b75f-408d-89bc-89ac48fbac14
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: f1b36db0-84cf-4c39-b07c-503d1050948d
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 04c4bccf-c138-4351-9e57-6002045b722c
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 57114f68-aabe-412b-82df-02c4dac174fc
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 4eb8d5ba-d32d-40e7-b075-636866164304
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 90e635a8-3644-44b4-833b-626c038ca1a7
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public court' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_court = Source{[Schema="public",Item="court"]}[Data]
+				in
+				    public_court
+
+	annotation PBI_ResultType = Table
+

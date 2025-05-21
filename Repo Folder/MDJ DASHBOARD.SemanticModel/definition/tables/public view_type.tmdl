@@ -1,0 +1,80 @@
+table 'public view_type'
+	lineageTag: 1cc75842-7c81-48e0-b801-b511a9f939af
+
+	column view_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: abb8f033-9c81-4758-83a1-0a05d223e3e7
+		summarizeBy: none
+		sourceColumn: view_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: f02eac4e-4ebd-4139-8755-3f8a0ab80d31
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8fec16ca-02c7-4282-9099-eee6874d0b4d
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 547d197b-fd98-444b-8fb7-3682c754e6e7
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: ccc9b21c-3152-45ce-9dc4-1fe27928d45a
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: a8fe7e86-a032-4fef-9edc-4122d7e064c4
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public view_type' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_view_type = Source{[Schema="public",Item="view_type"]}[Data]
+				in
+				    public_view_type
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

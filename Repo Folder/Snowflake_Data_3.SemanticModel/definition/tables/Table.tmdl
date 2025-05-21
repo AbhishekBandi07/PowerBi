@@ -1,0 +1,79 @@
+table Table
+	lineageTag: e9e9c645-5980-4e7b-9b21-1871774a0ebb
+
+	measure TOTAL_ORDERS = COUNTROWS('FACT_ORDER_ANALYSIS (2)')
+		formatString: 0
+		lineageTag: 48fd3804-fbff-420d-8d04-ec25c06a494c
+
+	measure Average_Order_Value = AVERAGE('FACT_ORDER_ANALYSIS (2)'[AVERAGE_ORDER_VALUE_BY_CUSTOMER])
+		lineageTag: 6ca1d58f-079d-4455-af61-25b904b41913
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Total_Products_Sold = SUM('FACT_ORDER_ANALYSIS (2)'[TOTAL_ORDERS_BY_CUSTOMER])
+		lineageTag: bd5a0119-75e3-4b1b-99e9-8bcc37689fd5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Total_Payments = SUM('FACT_ORDER_ANALYSIS (2)'[PAYMENT_VALUE])
+		lineageTag: 16560abd-b982-43da-8255-d2cd9161c982
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Total_Shipping_Charges = SUM('FACT_ORDER_ANALYSIS (2)'[SHIPPING_CHARGES])
+		lineageTag: fd87736e-e777-4f25-b54d-55bae6acce0a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Total_Revenue = SUM('FACT_ORDER_ANALYSIS (2)'[TOTAL_REVENUE_PER_CATEGORY])
+		lineageTag: 247f9d2b-6fac-41eb-a52d-a21b4617f064
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Last_Year_Total_Revenue = ```
+			
+			CALCULATE(
+			    [M_Total_Revenue], 
+			    SAMEPERIODLASTYEAR(DIM_ORDER_TIME[ORDER_DATE])
+			)
+			
+			```
+		lineageTag: fe994fcc-5026-40d5-ba9e-4e5be5e71507
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Debug_Last_Year_Revenue = ```
+			
+			VAR ThisYear = [M_Total_Revenue]
+			VAR LastYear = 
+			    CALCULATE(
+			        [M_Total_Revenue],
+			        SAMEPERIODLASTYEAR(DIM_ORDER_TIME[ORDER_DATE])
+			    )
+			RETURN
+			IF(ThisYear = LastYear, BLANK(), LastYear)
+			
+			```
+		lineageTag: f20fa9cd-0198-4c2e-aab3-841188195c8f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		formatString: 0
+		lineageTag: 073a7be4-a998-4b25-b45c-c1700a3fb0d8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Table = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = e6faf0552e414f10a59e4b19a7e5695d
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":null}
+
+	annotation 277cc1b9-af89-4597-8e15-cacc25c0886b = To use special characters in a calculated table name, enclose the entire name in brackets ( [] ) and add a ] to any closing brackets in the name.
+

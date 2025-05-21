@@ -1,0 +1,82 @@
+table 'public court_fiscal_year_mapping'
+	lineageTag: 4f161494-2379-40e9-aa02-846dd79750f3
+
+	column court_fiscal_year_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a5899c13-217e-480d-ad1a-f75e44adc09c
+		summarizeBy: none
+		sourceColumn: court_fiscal_year_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column fiscal_year
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2981122b-87a1-4a85-9375-ffece0b7b369
+		summarizeBy: sum
+		sourceColumn: fiscal_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fa1b3c8f-55b4-4e9a-bfa9-1fa5618a0533
+		summarizeBy: sum
+		sourceColumn: court_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: aefcac9f-a313-4be2-bc8b-19dc5e5d4e98
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 3243b8bb-a703-44ae-9af4-69a1c4cf27c5
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: e707bf49-cdeb-4574-9be9-444f1dd24923
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public court_fiscal_year_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_court_fiscal_year_mapping = Source{[Schema="public",Item="court_fiscal_year_mapping"]}[Data]
+				in
+				    public_court_fiscal_year_mapping
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

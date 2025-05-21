@@ -1,0 +1,98 @@
+table 'public file'
+	lineageTag: 4d7114a0-f56c-4007-b337-6f0e6fd3c053
+
+	column file_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0d623cc0-bb3a-4f3c-bc57-c3eb35b7ff41
+		summarizeBy: none
+		sourceColumn: file_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column uuid
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: b214d9f9-072c-4359-802a-cadcff14daa6
+		summarizeBy: none
+		sourceColumn: uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 334ea6a7-fe47-4a11-823a-a54cbda6bcea
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column mask_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 997aa8fb-0875-4157-b993-6c00ada06919
+		summarizeBy: none
+		sourceColumn: mask_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_deleted
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: a97a9507-ca07-49c5-bc12-d5d665c3b6b8
+		summarizeBy: none
+		sourceColumn: is_deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 75047341-0080-4078-8212-54503db1df6e
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: e93ec20a-c0f2-4472-acd7-c87ce8507a3a
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: dad50841-475f-4094-ae38-87ea8722966c
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public file' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_file = Source{[Schema="public",Item="file"]}[Data]
+				in
+				    public_file
+
+	annotation PBI_ResultType = Table
+

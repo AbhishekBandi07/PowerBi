@@ -1,0 +1,53 @@
+table ACTIVITY_SCOM
+	lineageTag: e21253b6-87bb-4c73-8b43-8140b6a02133
+
+	column FiscalYear
+		lineageTag: 080987e3-717e-4f76-a0e5-ef201cd61ca8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FiscalYear]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DataUploadIDs
+		formatString: 0
+		lineageTag: 5172b757-d59a-47be-b490-7d258582c77a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [DataUploadIDs]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CategoryFiscalYearIDs
+		lineageTag: 4ac86cb0-fe08-4031-aefa-5d0da30ccfc3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CategoryFiscalYearIDs]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ACTIVITY_SCOM = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE(
+				    "FiscalYear", STRING,
+				    "DataUploadIDs", INTEGER,
+				    "CategoryFiscalYearIDs", STRING,
+				    {
+				        {"2023", 792, "345"},
+				        {"2022", 664, "373"},
+				        {"2021", 716, "342"},
+				        {"2020", 764, "337"},
+				        {"2019", 478, "309"},
+				        {"2016", 358, "187,165,132"},
+				        {"2015", 728, "198,113,106,105"},
+				        {"2013", 374, "196,150"},
+				        {"2012", 373, "195,149"}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = 94869c46a9314df89bf3ecc4e1e1e480
+

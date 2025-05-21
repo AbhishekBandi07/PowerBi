@@ -1,0 +1,139 @@
+table TARGET_TABLE
+	lineageTag: 5d913113-53c1-4713-9395-f55e1f6ed8e6
+
+	measure YEAR = YEAR('TARGET_TABLE'[SUBSCRIPTION])
+		lineageTag: c67b7b8b-38d8-4d7a-9be2-84a09f4eb44a
+
+	measure M_Year = YEAR('TARGET_TABLE'[SUBSCRIPTION])
+		lineageTag: 4427ac69-7002-4a71-8e59-7de5135049e3
+
+	column ID
+		dataType: double
+		lineageTag: b6186c4a-e69f-4797-9019-97fe13a04496
+		summarizeBy: count
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER
+		dataType: string
+		lineageTag: ca0ad73d-e17b-4668-a33a-72e9f82ffd96
+		summarizeBy: none
+		sourceColumn: CUSTOMER
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRST_NAME
+		dataType: string
+		lineageTag: 3643e04e-a4e6-49d1-bbb1-26c006fbbe15
+		summarizeBy: none
+		sourceColumn: FIRST_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_NAME
+		dataType: string
+		lineageTag: fafef992-093b-4f5a-8529-adcd10e1e1c7
+		summarizeBy: none
+		sourceColumn: LAST_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY
+		dataType: string
+		lineageTag: feb39851-b806-41aa-9aa0-0c80a54fa453
+		summarizeBy: none
+		sourceColumn: COMPANY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		lineageTag: 67fc3f8c-bca2-4afc-a458-286e2c79a523
+		summarizeBy: none
+		sourceColumn: CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY
+		dataType: string
+		lineageTag: 90af626e-1310-49a6-8fd4-0228b3a6d61b
+		summarizeBy: none
+		sourceColumn: COUNTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PHONE_1
+		dataType: string
+		lineageTag: 57e30419-2dec-44d9-8563-cca29d45d346
+		summarizeBy: none
+		sourceColumn: PHONE_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column PHONE_2
+		dataType: string
+		lineageTag: 00e131e3-b2fd-4cd8-bbbf-ceb54b5ab2b5
+		summarizeBy: none
+		sourceColumn: PHONE_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL
+		dataType: string
+		lineageTag: 8d8ebc55-a097-4bb4-8731-e7d95f727a55
+		summarizeBy: none
+		sourceColumn: EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUBSCRIPTION
+		dataType: string
+		lineageTag: 3e644973-f695-4fd1-ad9f-dcf853d016af
+		summarizeBy: none
+		sourceColumn: SUBSCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEBSITE
+		dataType: string
+		lineageTag: cd11d93b-4193-444d-bf0f-3233d2d0f23e
+		summarizeBy: none
+		sourceColumn: WEBSITE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ROW_HASH
+		dataType: string
+		lineageTag: 7dc70a6f-3bfa-4d72-a6ee-902b0043347b
+		summarizeBy: none
+		sourceColumn: ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	column FULL_NAME
+		dataType: string
+		lineageTag: 7be0fbae-f3df-4f85-ba43-1afa883c9a71
+		summarizeBy: none
+		sourceColumn: FULL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TARGET_TABLE = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("MYB91719.us-east-1.snowflakecomputing.com","WAREHOUSE1",[Implementation="2.0"]),
+				    MY_DB_Database = Source{[Name="MY_DB",Kind="Database"]}[Data],
+				    MY_SCHEMA_Schema = MY_DB_Database{[Name="MY_SCHEMA",Kind="Schema"]}[Data],
+				    TARGET_TABLE_Table = MY_SCHEMA_Schema{[Name="TARGET_TABLE",Kind="Table"]}[Data],
+				    #"Added Custom" = Table.AddColumn(TARGET_TABLE_Table, "FULL_NAME", each [FIRST_NAME] & " " & [LAST_NAME])
+				in
+				    #"Added Custom"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

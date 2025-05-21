@@ -1,0 +1,138 @@
+table 'public values'
+	lineageTag: 7698ef1b-77ab-46cc-83d5-f8268296cd52
+
+	column value_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3ca8518c-3314-4dc6-82fb-9006e4f2af51
+		summarizeBy: none
+		sourceColumn: value_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 9758272d-9481-4c44-9da7-a5553d235919
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8af846a1-f41a-47af-92f0-4aaa71913915
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7b9bdddc-7700-430c-aa8c-e3aad71e65e7
+		summarizeBy: sum
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sort_order
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ee7d6b6b-5be7-4665-8276-e38c19016f67
+		summarizeBy: sum
+		sourceColumn: sort_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: b6ee191a-397b-457a-89a7-e96fd82340fd
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 4bd182ae-91a3-4da2-9535-8fb35f678c68
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: ec5903f1-d68a-42f5-968f-cc83f38628d9
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column parent_value_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7add448f-7e42-48a4-8da7-fb37af44d43a
+		summarizeBy: sum
+		sourceColumn: parent_value_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_case_type
+		dataType: string
+		sourceProviderType: nvarchar(255)
+		lineageTag: 7f51ba98-9aef-43e9-9f14-d386cb9a6c0a
+		summarizeBy: none
+		sourceColumn: value_case_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column computed_column
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6a5c2f8c-8a68-45e8-bb7e-27cca9bb6cdc
+		summarizeBy: sum
+		sourceColumn: computed_column
+
+		annotation SummarizationSetBy = Automatic
+
+	column new_column
+		dataType: string
+		sourceProviderType: nvarchar(255)
+		lineageTag: cb2f083d-3147-4230-a102-42b7a3e7c81f
+		summarizeBy: none
+		sourceColumn: new_column
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public values' = m
+		mode: directQuery
+		source =
+				let
+				    Source = Value.NativeQuery(PostgreSQL.Database("localhost:5432", "Power Bi"), "SELECT #(lf)    v1.*, #(lf)    COALESCE(v2.display_name, v1.display_name) AS Value_Case_Type,#(lf)    CASE #(lf)        WHEN v1.parent_value_id < v1.value_id #(lf)        THEN v3.parent_value_id #(lf)        ELSE NULL #(lf)    END AS computed_column,#(lf)    (SELECT v.display_name #(lf)     FROM values AS v #(lf)     WHERE v.value_id = #(lf)           CASE #(lf)               WHEN v1.parent_value_id < v1.value_id #(lf)               THEN v3.parent_value_id #(lf)               ELSE NULL #(lf)           END#(lf)    ) AS New_Column#(lf)FROM values AS v1#(lf)LEFT JOIN values AS v2 #(lf)    ON v1.parent_value_id = v2.value_id#(lf)LEFT JOIN values AS v3#(lf)    ON v1.parent_value_id = v3.value_id#(lf)", null, [EnableFolding=true]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each true)
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Dashboard","LE - Submittal Report"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.139.1678.0 (24.12)+2a034ab280bddf891eb7bb9ebfe6996f9c3a3196
+
+ref table Dashboard
+ref table 'LE - Submittal Report'
+ref table DateTableTemplate_7e4aca3f-010c-4c11-88cc-96ffd656afec
+ref table LocalDateTable_248e1ed8-232f-4f1e-9322-596f8185fef4
+ref table LocalDateTable_4fcdee78-8fc8-4a53-b273-3a738121df61
+ref table LocalDateTable_0747df8f-0baf-42d9-a49e-b3ad56301c72
+
+ref cultureInfo en-US
+

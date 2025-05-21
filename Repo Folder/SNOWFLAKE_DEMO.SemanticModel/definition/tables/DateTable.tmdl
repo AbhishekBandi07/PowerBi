@@ -1,0 +1,86 @@
+table DateTable
+	lineageTag: 0bf7075b-483f-49c3-bcaf-efb7d2b98126
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: General Date
+		lineageTag: 9c7ec4ee-67cd-4ae2-818a-d144e9b50f64
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 94816825-011e-4fbc-9d1f-90c5fc1826f5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		formatString: 0
+		lineageTag: c687a88b-bde8-44e3-a19f-4820c7d14aa2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		lineageTag: e6d372db-95b4-4fbd-aadb-400ebbfe48d0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: 5d63c9d6-23dc-4a71-aaec-b3568f8af3e6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		formatString: 0
+		lineageTag: 9ca46d3b-9487-4460-9247-9e0bb59d6c58
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day of Week]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Name'
+		lineageTag: b465c248-1542-4c8b-8ecc-38c6c3453472
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DateTable = calculated
+		mode: import
+		source = ```
+				
+				ADDCOLUMNS (
+				    CALENDAR (
+				        MIN ( FACT_ORDER_ANALYSIS[FIRST_ORDER_DATE] ),
+				        MAX ( FACT_ORDER_ANALYSIS[LAST_ORDER_DATE] )
+				    ),
+				    "Year", YEAR([Date]),
+				    "Month Number", MONTH([Date]),
+				    "Month Name", FORMAT([Date], "MMMM"),
+				    "Quarter", "Q" & FORMAT([Date], "Q"),
+				    "Day of Week", WEEKDAY([Date]),
+				    "Day Name", FORMAT([Date], "dddd")
+				)
+				
+				```
+
+	annotation PBI_Id = 7cddb4971acb4b6a8d1e8709ebb75e5f
+

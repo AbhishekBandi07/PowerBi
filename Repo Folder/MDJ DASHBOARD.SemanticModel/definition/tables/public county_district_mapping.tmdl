@@ -1,0 +1,80 @@
+table 'public county_district_mapping'
+	lineageTag: b29dae09-64a1-473f-833a-0f5973103879
+
+	column county_district_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 538e12ff-26ec-4b17-ae85-4dd113877563
+		summarizeBy: sum
+		sourceColumn: county_district_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column county_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 34669530-372b-4b63-9ef2-2e2e44ff5059
+		summarizeBy: none
+		sourceColumn: county_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column district_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2da61776-0d98-4069-8a2b-6d1e191bada8
+		summarizeBy: none
+		sourceColumn: district_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: ee421d8c-e15b-46a5-b7e2-3742bbf236b6
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 6cd7c596-0503-4d8f-aa37-d1ae1b186d13
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 18ebebe6-1afe-4938-8327-6e2a20b54197
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public county_district_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_county_district_mapping = Source{[Schema="public",Item="county_district_mapping"]}[Data]
+				in
+				    public_county_district_mapping
+
+	annotation PBI_ResultType = Table
+

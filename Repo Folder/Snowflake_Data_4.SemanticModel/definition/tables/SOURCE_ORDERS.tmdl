@@ -1,0 +1,67 @@
+table SOURCE_ORDERS
+	lineageTag: 096c8720-2170-4af3-9965-90be3af11f1f
+
+	measure Measure = COUNTX(SOURCE_ORDERS,SOURCE_ORDERS[ORDER_ID])
+		formatString: 0
+		lineageTag: 2e59ae85-b559-4a90-9e58-8fe7ccfab6ca
+
+		extendedProperty ChangeDetectionMetadata =
+				{
+				  "version": 0,
+				  "refreshInterval": "PT5S"
+				}
+
+	column ORDER_ID
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 75b55f67-1b06-4499-adb1-4ba4cef16033
+		summarizeBy: none
+		sourceColumn: ORDER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 9f4f3e61-4cae-4f46-a78a-489911fd315d
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_PURCHASE_TIMESTAMP
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 392810e1-3651-4cca-aa6b-ab23173c974c
+		summarizeBy: none
+		sourceColumn: ORDER_PURCHASE_TIMESTAMP
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_APPROVED_AT
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: ed895b93-e6b9-4ed7-8d59-0fff6ff4065c
+		summarizeBy: none
+		sourceColumn: ORDER_APPROVED_AT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SOURCE_ORDERS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("BPC06675.us-east-1.snowflakecomputing.com","POWERBI_TEST",[Implementation="2.0"]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    SOURCE_ORDERS_Table = CUSTOMERS_SCHEMA_Schema{[Name="SOURCE_ORDERS",Kind="Table"]}[Data]
+				in
+				    SOURCE_ORDERS_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

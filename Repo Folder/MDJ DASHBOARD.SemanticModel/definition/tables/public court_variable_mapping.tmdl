@@ -1,0 +1,90 @@
+table 'public court_variable_mapping'
+	lineageTag: d1695933-f2f8-4cc0-a264-e0b7b3fe3d39
+
+	column court_variable_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d851cf6b-5e5e-481a-9776-db9f98a4b025
+		summarizeBy: sum
+		sourceColumn: court_variable_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_fiscal_year_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2b07510d-a8e3-45d6-9363-2d4f1c8d51fb
+		summarizeBy: none
+		sourceColumn: court_fiscal_year_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b5e2ab1b-eec8-4ce7-8798-fab00f0a5946
+		summarizeBy: none
+		sourceColumn: variable_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: c28866bd-8f0b-4924-a242-459ce3efdd86
+		summarizeBy: none
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 38c1678f-8e83-4e80-ac13-bf61bda55528
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 642a0f19-fc55-4631-9a36-f3a9c7ed843a
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: bdc4e36e-0b0c-4d7f-b0d9-e774aaf6af02
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public court_variable_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_court_variable_mapping = Source{[Schema="public",Item="court_variable_mapping"]}[Data]
+				in
+				    public_court_variable_mapping
+
+	annotation PBI_ResultType = Table
+

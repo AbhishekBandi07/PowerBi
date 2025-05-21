@@ -1,0 +1,12 @@
+expression FACT_ORDER_ANALYSIS =
+		let
+		    Source = Odbc.DataSource("dsn=Snowflake_Data_2", [HierarchicalNavigation=true]),
+		    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+		    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+		    FACT_ORDER_ANALYSIS_Table = CUSTOMERS_SCHEMA_Schema{[Name="FACT_ORDER_ANALYSIS",Kind="Table"]}[Data]
+		in
+		    FACT_ORDER_ANALYSIS_Table
+	lineageTag: 59024ce0-5aef-47ea-a7f0-b91e3ad95906
+
+	annotation PBI_ResultType = Table
+

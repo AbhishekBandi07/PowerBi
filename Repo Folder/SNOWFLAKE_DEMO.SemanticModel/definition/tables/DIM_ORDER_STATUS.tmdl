@@ -1,0 +1,76 @@
+table DIM_ORDER_STATUS
+	lineageTag: 71371b57-5be3-48e3-bee4-df673447df44
+
+	column ORDER_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 04e2bc83-bd4a-4495-81ca-807bd077c2bf
+		summarizeBy: none
+		sourceColumn: ORDER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_STATUS_CATEGORY
+		dataType: string
+		sourceProviderType: nvarchar(16)
+		lineageTag: f023e2df-af84-497a-bf29-9ed5e0365280
+		summarizeBy: none
+		sourceColumn: ORDER_STATUS_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_PURCHASE_TIMESTAMP
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 0e600fda-3595-4877-9e8b-dfdbe6d26ee5
+		summarizeBy: none
+		sourceColumn: ORDER_PURCHASE_TIMESTAMP
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_APPROVED_AT
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: f928e049-f4bc-4ed5-b206-cf394d57acec
+		summarizeBy: none
+		sourceColumn: ORDER_APPROVED_AT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_PROCESSING_TIME
+		dataType: double
+		sourceProviderType: decimal(18, 0)
+		lineageTag: bbfdb487-f93c-4584-8f71-824d54efce17
+		summarizeBy: sum
+		sourceColumn: ORDER_PROCESSING_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		sourceProviderType: nvarchar(128)
+		lineageTag: 56b569aa-2520-4a1e-ab38-8bbb357c5b47
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_ORDER_STATUS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("tzc61476.us-east-1.snowflakecomputing.com","POWERBI_WH",[Implementation="2.0"]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_ORDER_STATUS_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_ORDER_STATUS",Kind="Table"]}[Data]
+				in
+				    DIM_ORDER_STATUS_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

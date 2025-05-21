@@ -1,0 +1,80 @@
+table 'public variable_value_type_mapping'
+	lineageTag: 5b9d40ad-bd32-433e-9eaa-535764d85c2b
+
+	column variable_value_type_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4635bdea-40fd-43ff-8d36-9fb980ae3799
+		summarizeBy: sum
+		sourceColumn: variable_value_type_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: df6435ab-5bc2-44be-875d-626c3e8b094b
+		summarizeBy: sum
+		sourceColumn: variable_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b2d528de-ca34-4226-83d9-da28f94596a2
+		summarizeBy: none
+		sourceColumn: value_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 5039d45c-d0ea-467f-b540-9e0d56da474d
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: a6ed0429-599b-4b5a-9eb4-b27b4601fb4f
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 4a6dad78-6145-4fc4-a23c-4de9c83ca712
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public variable_value_type_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_variable_value_type_mapping = Source{[Schema="public",Item="variable_value_type_mapping"]}[Data]
+				in
+				    public_variable_value_type_mapping
+
+	annotation PBI_ResultType = Table
+

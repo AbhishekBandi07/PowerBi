@@ -1,0 +1,78 @@
+table DIM_PAYMENTS
+	lineageTag: c6200bac-b790-477e-9d37-c3b901310d0b
+
+	column ORDER_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: f12eba44-dc20-4b38-8ccf-4e6fe05f238a
+		summarizeBy: none
+		sourceColumn: ORDER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_SEQUENTIAL
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 3c4567cf-b3bf-410b-b54c-a6ac38ee2fe2
+		summarizeBy: none
+		sourceColumn: PAYMENT_SEQUENTIAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_TYPE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 784640b9-ed1b-42bf-b201-d30a27902b14
+		summarizeBy: none
+		sourceColumn: PAYMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_INSTALLMENTS
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 496884dc-4afd-4b79-8ceb-02d11976328c
+		summarizeBy: none
+		sourceColumn: PAYMENT_INSTALLMENTS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_VALUE
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 3f454a74-2e65-4d95-964a-93f1caeefc8e
+		summarizeBy: none
+		sourceColumn: PAYMENT_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		sourceProviderType: nvarchar(128)
+		lineageTag: f6360c0e-de96-4910-8145-80ddb1ba77ae
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PAYMENTS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("BPC06675.us-east-1.snowflakecomputing.com","POWERBI_TEST",[Implementation="2.0"]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_PAYMENTS_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_PAYMENTS",Kind="Table"]}[Data]
+				in
+				    DIM_PAYMENTS_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

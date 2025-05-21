@@ -1,0 +1,90 @@
+table 'public data_upload_history'
+	lineageTag: 96bffb21-9deb-4e63-8d21-5bd40719a82c
+
+	column data_upload_history_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e00a8eda-31a1-4b31-8299-98ae2ecd7042
+		summarizeBy: sum
+		sourceColumn: data_upload_history_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_upload_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a2cdd05a-c0e3-4203-84ac-24200de9b6be
+		summarizeBy: none
+		sourceColumn: data_upload_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column file_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3bb89be4-6c65-46ef-8540-e5602253df7c
+		summarizeBy: sum
+		sourceColumn: file_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 05aa7431-2e98-4c1b-8f5f-50e7f6eddacf
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_by
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 627557f6-ab33-40e3-960e-4f6d77e4166e
+		summarizeBy: sum
+		sourceColumn: updated_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 84904759-acc2-402c-baa4-b186381a13b6
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 4b4c81e6-405c-4c79-a012-8d1bb5999ac5
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public data_upload_history' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_data_upload_history = Source{[Schema="public",Item="data_upload_history"]}[Data]
+				in
+				    public_data_upload_history
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

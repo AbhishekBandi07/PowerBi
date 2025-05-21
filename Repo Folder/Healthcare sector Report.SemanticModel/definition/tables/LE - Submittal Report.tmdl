@@ -1,0 +1,298 @@
+table 'LE - Submittal Report'
+	lineageTag: 606455e0-9a24-4b0b-802c-9484dbeaf527
+
+	column 'Recruiter Name'
+		dataType: string
+		lineageTag: 7b3d99aa-670a-454d-bd9e-3a6e5e990416
+		summarizeBy: none
+		sourceColumn: Recruiter Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: a9d331b4-3462-4c60-bc3e-32494d2d5f27
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 505719f7-cdd7-450a-897c-95a02b570c76
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		formatString: Mohali
+		lineageTag: dba0c77b-ae43-4e48-8331-f6551c99d4f5
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Location
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column Month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ed88b8f7-6989-4262-a76c-9a70b0ceed60
+		summarizeBy: none
+		sourceColumn: Month
+
+		variation Variation
+			isDefault
+			relationship: 4813b83b-a4b2-4491-b868-20197e48fc7d
+			defaultHierarchy: LocalDateTable_248e1ed8-232f-4f1e-9322-596f8185fef4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Category_1
+		dataType: string
+		lineageTag: 239f8440-a5b2-419e-a4b1-5498094ab584
+		summarizeBy: none
+		sourceColumn: Category_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client
+		dataType: string
+		lineageTag: 43719cc0-5dc8-406c-a286-89740720d48e
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column VMS
+		dataType: string
+		lineageTag: 08beeaa1-fc20-4eb2-97d9-9d9db5f6e852
+		summarizeBy: none
+		sourceColumn: VMS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Submittal Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: e42e6c43-204f-4457-a5ea-6f4cee3eefac
+		summarizeBy: count
+		sourceColumn: Submittal Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client State'
+		dataType: string
+		lineageTag: c56dbad8-f231-423d-8f93-3e7d7d6d234c
+		summarizeBy: none
+		sourceColumn: Client State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 026a7ea1-9a0b-4daa-b2db-e0e281d6cd5c
+		summarizeBy: count
+		sourceColumn: Job Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profession
+		dataType: string
+		lineageTag: f3dd6e21-a154-46c7-846d-133675db0f76
+		summarizeBy: none
+		sourceColumn: Profession
+
+		annotation SummarizationSetBy = Automatic
+
+	column Specialty
+		dataType: string
+		lineageTag: 3496d688-5653-4989-af4c-c0c7bdca738f
+		summarizeBy: none
+		sourceColumn: Specialty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Type'
+		dataType: string
+		lineageTag: e1eeaa10-e734-469c-884e-620705a697d8
+		summarizeBy: none
+		sourceColumn: Job Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate Name'
+		dataType: string
+		lineageTag: 1bf67d27-2944-4919-9a62-e3096620a09b
+		summarizeBy: none
+		sourceColumn: Candidate Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Referral Source'
+		dataType: string
+		lineageTag: 84879a15-f33a-431f-9799-21f37f880f1a
+		summarizeBy: none
+		sourceColumn: Referral Source
+
+		annotation SummarizationSetBy = Automatic
+
+	column Recruiter
+		dataType: string
+		lineageTag: e95f6373-d620-4edf-9f01-f88c4cd144ff
+		summarizeBy: none
+		sourceColumn: Recruiter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Recruiting Teams List'
+		dataType: string
+		lineageTag: 188063a3-414f-4263-9076-86a59aa72f3a
+		summarizeBy: none
+		sourceColumn: Recruiting Teams List
+
+		annotation SummarizationSetBy = Automatic
+
+	column Deal/Extension
+		dataType: string
+		lineageTag: ca9f5de1-f40e-4c18-bcf9-c9cc988c3e89
+		summarizeBy: none
+		sourceColumn: Deal/Extension
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Submittal Notes'
+		dataType: string
+		lineageTag: d497c549-ab49-40c2-ae83-f6397c7b64d6
+		summarizeBy: none
+		sourceColumn: Submittal Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status_2
+		dataType: string
+		lineageTag: 0c8d4a79-790c-4e4a-be17-76adf4775f98
+		summarizeBy: none
+		sourceColumn: Status_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Submittal Modified Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f155a412-6ee3-4921-be8b-95a77e687d6e
+		summarizeBy: none
+		sourceColumn: Submittal Modified Date
+
+		variation Variation
+			isDefault
+			relationship: a92a4406-8476-43bb-8270-a14b6a8d0e66
+			defaultHierarchy: LocalDateTable_4fcdee78-8fc8-4a53-b273-3a738121df61.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'External Job Posting ID'
+		dataType: string
+		lineageTag: 3636f120-d58e-4749-9ae2-3e00272f202f
+		summarizeBy: none
+		sourceColumn: External Job Posting ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Original Referral Source'
+		dataType: string
+		lineageTag: 86e984a3-648b-4cab-8bbc-c1b4f1c6336c
+		summarizeBy: none
+		sourceColumn: Original Referral Source
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Submittal Modified By'
+		dataType: string
+		lineageTag: f84a1958-c2ca-48ca-b5c6-32aaca266873
+		summarizeBy: none
+		sourceColumn: Submittal Modified By
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_3
+		dataType: string
+		lineageTag: ddd4419c-1098-4cac-83a9-9a4ad5b4293e
+		summarizeBy: none
+		sourceColumn: Location_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month , Year'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c06d6be2-198f-408f-a5de-54154b33d477
+		summarizeBy: none
+		sourceColumn: Month , Year
+
+		variation Variation
+			isDefault
+			relationship: e56ae41b-4860-43c6-bdf3-78aeb825f537
+			defaultHierarchy: LocalDateTable_0747df8f-0baf-42d9-a49e-b3ad56301c72.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Team Name'
+		dataType: string
+		lineageTag: 7d2c8e37-8cf1-4acb-a1a7-a22cc8f42ea5
+		summarizeBy: none
+		sourceColumn: Team Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column29
+		dataType: string
+		lineageTag: 406a42f7-16ed-4e00-8da0-5ab7adbc96a6
+		summarizeBy: none
+		sourceColumn: Column29
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Recruiter Name_4'
+		dataType: string
+		lineageTag: d2e23cf8-569d-4cd7-b0ec-79000037afdb
+		summarizeBy: none
+		sourceColumn: Recruiter Name_4
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_5
+		dataType: string
+		lineageTag: 505dbbda-35e8-4259-b445-488836847632
+		summarizeBy: none
+		sourceColumn: Location_5
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LE - Submittal Report' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\bandi.abhishek_infoj\Downloads\Raw-Data-4-Abhishek-20250130.xlsx"), null, true),
+				    #"LE - Submittal Report_Sheet" = Source{[Item="LE - Submittal Report",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"LE - Submittal Report_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Recruiter Name", type text}, {"Status", type text}, {"Category", type text}, {"Location", type text}, {"Month", type date}, {"Category_1", type text}, {"Client", type text}, {"VMS", type text}, {"Submittal Id", Int64.Type}, {"Client State", type text}, {"Job Id", Int64.Type}, {"Profession", type text}, {"Specialty", type text}, {"Job Type", type text}, {"Candidate Name", type text}, {"Referral Source", type text}, {"Recruiter", type text}, {"Recruiting Teams List", type text}, {"Deal/Extension", type text}, {"Submittal Notes", type text}, {"Status_2", type text}, {"Submittal Modified Date", type datetime}, {"External Job Posting ID", type any}, {"Original Referral Source", type text}, {"Submittal Modified By", type text}, {"Location_3", type text}, {"Month , Year", type date}, {"Team Name", type text}, {"Column29", type any}, {"Recruiter Name_4", type text}, {"Location_5", type text}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","","Mohali",Replacer.ReplaceValue,{"Location_3"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","","Mohali",Replacer.ReplaceValue,{"Location"})
+				in
+				    #"Replaced Value1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

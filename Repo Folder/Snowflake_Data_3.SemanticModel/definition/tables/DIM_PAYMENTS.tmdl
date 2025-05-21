@@ -1,0 +1,70 @@
+table DIM_PAYMENTS
+	lineageTag: ba1360a2-1bb4-486c-8799-990ee8a353bd
+
+	column ORDER_ID
+		dataType: string
+		lineageTag: 49401b83-4a69-4f4e-ab91-e7e156d8d8ac
+		summarizeBy: none
+		sourceColumn: ORDER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_SEQUENTIAL
+		dataType: double
+		lineageTag: 17d980b3-5c4f-4d13-aec3-8bc50ed8b2b2
+		summarizeBy: none
+		sourceColumn: PAYMENT_SEQUENTIAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_TYPE
+		dataType: string
+		lineageTag: 5e698c21-6352-48ac-a3fb-e3649eb62fd7
+		summarizeBy: none
+		sourceColumn: PAYMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_INSTALLMENTS
+		dataType: double
+		lineageTag: a664a5e0-ad64-48eb-be4f-5ae49d11159e
+		summarizeBy: none
+		sourceColumn: PAYMENT_INSTALLMENTS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_VALUE
+		dataType: double
+		lineageTag: afc1c38f-9fda-47da-8c22-98b1c7dd0acd
+		summarizeBy: none
+		sourceColumn: PAYMENT_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: ecb7818e-61ae-4092-85cf-f334d2252bc5
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PAYMENTS = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=Snowflake_Data_2", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_PAYMENTS_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_PAYMENTS",Kind="Table"]}[Data]
+				in
+				    DIM_PAYMENTS_Table
+
+	annotation PBI_ResultType = Table
+

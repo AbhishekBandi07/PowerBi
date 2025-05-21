@@ -1,0 +1,80 @@
+table 'public filter_values_mapping'
+	lineageTag: c3337841-3cf5-4706-a42a-a081f60fe56c
+
+	column filter_value_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b3b05583-1a8c-4882-8073-de409e838ce1
+		summarizeBy: sum
+		sourceColumn: filter_value_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column filter_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e090c57a-ec40-4aef-bd37-14992a256b75
+		summarizeBy: none
+		sourceColumn: filter_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ecf5fc2f-0703-49d8-b4a5-50b5589953a4
+		summarizeBy: none
+		sourceColumn: value_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 78cec063-b7e4-4ef4-b9d8-6fa32f50cab0
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: b69d2b59-930f-424e-bf4c-10bba5270635
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 171ef3c8-79c8-4637-9fcd-9df1e784b297
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public filter_values_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_filter_values_mapping = Source{[Schema="public",Item="filter_values_mapping"]}[Data]
+				in
+				    public_filter_values_mapping
+
+	annotation PBI_ResultType = Table
+

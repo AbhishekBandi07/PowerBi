@@ -1,0 +1,72 @@
+table DIM_PAYMENTS
+	lineageTag: 410b0717-e1bb-475c-9377-aedf6a5b83a7
+
+	column ORDER_ID
+		dataType: string
+		lineageTag: b641d9f9-efa6-42f3-b9ca-44366dea8380
+		summarizeBy: none
+		sourceColumn: ORDER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_SEQUENTIAL
+		dataType: double
+		lineageTag: 5065f021-a68a-498c-816f-c47870fb0f72
+		summarizeBy: none
+		sourceColumn: PAYMENT_SEQUENTIAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_TYPE
+		dataType: string
+		lineageTag: 2f077aa8-1a6e-46af-b415-1fac766dd29b
+		summarizeBy: none
+		sourceColumn: PAYMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_INSTALLMENTS
+		dataType: double
+		lineageTag: f362f12b-75be-4cec-91b2-5b5e00f23e67
+		summarizeBy: none
+		sourceColumn: PAYMENT_INSTALLMENTS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_VALUE
+		dataType: double
+		lineageTag: 771dbd36-0f9a-4f33-a4d0-c5c1c439cfe6
+		summarizeBy: none
+		sourceColumn: PAYMENT_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: f3ea83ad-c95f-4499-a695-f33c54276b4e
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PAYMENTS = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=E-Commerce Data", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    DBT_SSACHDEVA_ANALYTICS_Schema = CUSTOMERS_DB_Database{[Name="DBT_SSACHDEVA_ANALYTICS",Kind="Schema"]}[Data],
+				    DIM_PAYMENTS_Table = DBT_SSACHDEVA_ANALYTICS_Schema{[Name="DIM_PAYMENTS",Kind="Table"]}[Data]
+				in
+				    DIM_PAYMENTS_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

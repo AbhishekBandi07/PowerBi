@@ -1,0 +1,85 @@
+table 'public county'
+	lineageTag: 05422077-f778-478c-9e8c-7a9d36341131
+
+	column county_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 13a747aa-6f9e-40a7-bf39-39f51d6b5697
+		summarizeBy: none
+		sourceColumn: county_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 61fac19e-5771-4725-9c13-96ce84806e41
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: d37db722-8134-4c5c-95a5-d37d085ba320
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 7028e45d-d3f9-4343-b282-0d4a08bbcb6f
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 70c300e5-8b37-444c-9e55-d1a644a5039e
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 095069af-6c87-422b-9821-a87c832a4482
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'display_name Hierarchy'
+		lineageTag: fd9a1be4-6406-494d-8821-29b146db2b31
+
+		level display_name
+			lineageTag: 655253fc-5d65-415b-aff0-123a39fad74a
+			column: display_name
+
+	partition 'public county' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_county = Source{[Schema="public",Item="county"]}[Data]
+				in
+				    public_county
+
+	annotation PBI_ResultType = Table
+

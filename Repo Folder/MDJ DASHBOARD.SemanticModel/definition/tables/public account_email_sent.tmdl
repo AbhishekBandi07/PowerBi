@@ -1,0 +1,116 @@
+table 'public account_email_sent'
+	lineageTag: 192d198f-4f2c-40aa-bf3c-7bc31d8ea8ee
+
+	column account_email_sent_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 601a49a6-b571-459a-85f6-e9b66cfde5ab
+		summarizeBy: sum
+		sourceColumn: account_email_sent_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6714432b-311b-4ba7-a200-5512e757bdd2
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sent_for
+		dataType: string
+		lineageTag: 8e5abc88-ef0f-46cb-8eff-344311fb4aa3
+		summarizeBy: none
+		sourceColumn: sent_for
+
+		annotation SummarizationSetBy = Automatic
+
+	column sent_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 2b29bb05-221d-4e64-959f-523f83d67c73
+		summarizeBy: none
+		sourceColumn: sent_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 6cdd09e3-5b26-4976-8a9c-c1f1af4ef51b
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 62b477c3-0807-47b9-ac71-b39c0386f156
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column expired_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 38805c57-4c62-4dd4-a9ff-aa993cda0735
+		summarizeBy: none
+		sourceColumn: expired_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 25031b58-a24e-45b7-a997-14e937c906ae
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 137f78d1-ab2b-46d9-b381-d6dff731eada
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 08b870eb-647a-444f-9a13-4ec338531c1e
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public account_email_sent' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_account_email_sent = Source{[Schema="public",Item="account_email_sent"]}[Data]
+				in
+				    public_account_email_sent
+
+	annotation PBI_ResultType = Table
+

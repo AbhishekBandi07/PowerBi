@@ -1,0 +1,232 @@
+table 'FACT_ORDER_ANALYSIS (2)'
+	lineageTag: 114251ef-9c57-44a2-a0d1-7e1bc7360d05
+
+	column ORDER_ID
+		dataType: string
+		lineageTag: c741b223-1c28-4c5c-933d-5a9c909fd5bb
+		summarizeBy: none
+		sourceColumn: ORDER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_ID
+		dataType: string
+		lineageTag: ed18dbc6-4a31-4f7d-a875-f32adabcd2e5
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TIME_ID
+		dataType: string
+		lineageTag: dd5536cf-4b01-4a85-a46e-0b4ef6283129
+		summarizeBy: none
+		sourceColumn: TIME_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_ID
+		dataType: string
+		lineageTag: 58e76c46-9b4d-4597-bd77-d923c2a8f293
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CATEGORY_NAME
+		dataType: string
+		lineageTag: afa537b9-02f1-4dd6-8afd-1dcf8fb82acc
+		summarizeBy: none
+		sourceColumn: PRODUCT_CATEGORY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SELLER_ID
+		dataType: string
+		lineageTag: 7f6e8846-ae59-4f16-8bcf-2e9325046fd4
+		summarizeBy: none
+		sourceColumn: SELLER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRICE
+		dataType: double
+		lineageTag: f8952a2e-7cc3-4af2-b4e8-9934cb017e36
+		summarizeBy: sum
+		sourceColumn: PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIPPING_CHARGES
+		dataType: double
+		lineageTag: 50110185-110c-43ec-9684-f6419d895cae
+		summarizeBy: sum
+		sourceColumn: SHIPPING_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ORDER_VALUE
+		dataType: double
+		lineageTag: 5b72d373-3360-4969-b727-ed1666dadf0f
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDER_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_VALUE
+		dataType: double
+		lineageTag: 5ae26329-35e2-4780-82af-0d4b4987ef9b
+		summarizeBy: sum
+		sourceColumn: PAYMENT_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_TYPE
+		dataType: string
+		lineageTag: 59734dbe-d813-49df-88ce-3e397780599c
+		summarizeBy: none
+		sourceColumn: PAYMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_INSTALLMENTS
+		dataType: double
+		lineageTag: a5291519-07d4-47ea-820b-35f8cdb0a5ef
+		summarizeBy: sum
+		sourceColumn: PAYMENT_INSTALLMENTS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDER_STATUS_CATEGORY
+		dataType: string
+		lineageTag: a1ec1657-ff49-4584-86e6-0617c83a9137
+		summarizeBy: none
+		sourceColumn: ORDER_STATUS_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_PROCESSING_TIME
+		dataType: double
+		lineageTag: 9a726f3e-4e31-4cfa-a80e-b18b8347286a
+		summarizeBy: sum
+		sourceColumn: ORDER_PROCESSING_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER_ZIP_CODE
+		dataType: string
+		lineageTag: 6c06362f-ac04-4457-a7b2-0605bb26253f
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ZIP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CITY
+		dataType: string
+		lineageTag: e323e94c-abf8-4e01-8a94-78e55a7aabf0
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_STATE
+		dataType: string
+		lineageTag: 5ff6cf81-2c60-4d90-a648-cdaf573d3c35
+		summarizeBy: none
+		sourceColumn: CUSTOMER_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2cbe640c-4679-485c-8876-6ecf59abd167
+		summarizeBy: none
+		sourceColumn: FIRST_ORDER_DATE
+
+		variation Variation
+			isDefault
+			relationship: 7a5a7393-fe4c-4170-b78d-8ee5583b0b36
+			defaultHierarchy: LocalDateTable_17d1822e-c619-4e75-8687-f953ecefd0b3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ab34a2c8-2d13-4736-b2d0-385c1118bd56
+		summarizeBy: none
+		sourceColumn: LAST_ORDER_DATE
+
+		variation Variation
+			isDefault
+			relationship: c1ba561e-d1c9-4c76-af78-3573d699d805
+			defaultHierarchy: LocalDateTable_691871eb-b222-4bd7-89f9-eb4763119a1e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ORDERS_BY_CUSTOMER
+		dataType: double
+		lineageTag: 62d6fff7-cfed-4e0c-95f8-f1c343256786
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS_BY_CUSTOMER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_ORDER_VALUE_BY_CUSTOMER
+		dataType: double
+		lineageTag: 12ff60e0-4fe1-4593-89d6-1b92fe4dcfaa
+		summarizeBy: sum
+		sourceColumn: AVERAGE_ORDER_VALUE_BY_CUSTOMER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ORDERS_PER_CATEGORY
+		dataType: double
+		lineageTag: 8bbee770-a3b4-4691-9d20-9ba04c86b560
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS_PER_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_REVENUE_PER_CATEGORY
+		dataType: double
+		lineageTag: bf93ae93-83ae-4617-b8fa-d9e805b50879
+		summarizeBy: sum
+		sourceColumn: TOTAL_REVENUE_PER_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT_ORDER_ANALYSIS (2)' = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=Snowflake_Data_2", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    FACT_ORDER_ANALYSIS_Table = CUSTOMERS_SCHEMA_Schema{[Name="FACT_ORDER_ANALYSIS",Kind="Table"]}[Data]
+				in
+				    FACT_ORDER_ANALYSIS_Table
+
+	annotation PBI_ResultType = Table
+

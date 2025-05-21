@@ -1,0 +1,58 @@
+table DIM_CUSTOMER_LOCATION
+	lineageTag: 76a2314c-957e-4be1-a16f-3c8eecaed2bd
+
+	column CUSTOMER_ID
+		dataType: string
+		lineageTag: 1aa4f442-d628-4320-a5d2-5066b097ec68
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_ZIP_CODE
+		dataType: string
+		lineageTag: 0143ae11-4306-48dd-a1e0-30e234344bed
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ZIP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CITY
+		dataType: string
+		lineageTag: e83f8b3b-9b4f-40e2-ab65-191544b8a2cd
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_STATE
+		dataType: string
+		lineageTag: eaa1e4e1-2c05-41f8-ba6a-8c0db0f504bf
+		summarizeBy: none
+		sourceColumn: CUSTOMER_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: c7c05e32-1c84-48c6-a7a4-9511956e7c0c
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_CUSTOMER_LOCATION = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=E-Commerce Data", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    DBT_SSACHDEVA_ANALYTICS_Schema = CUSTOMERS_DB_Database{[Name="DBT_SSACHDEVA_ANALYTICS",Kind="Schema"]}[Data],
+				    DIM_CUSTOMER_LOCATION_Table = DBT_SSACHDEVA_ANALYTICS_Schema{[Name="DIM_CUSTOMER_LOCATION",Kind="Table"]}[Data]
+				in
+				    DIM_CUSTOMER_LOCATION_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

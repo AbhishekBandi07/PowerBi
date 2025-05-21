@@ -1,0 +1,130 @@
+table DIM_ORDER_TIME
+	lineageTag: f5d3af98-fc06-4d07-b93b-503916ab056f
+
+	column TIME_ID
+		dataType: string
+		lineageTag: 2d29d588-8e45-4cac-b103-b592498a899a
+		summarizeBy: none
+		sourceColumn: TIME_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_TIMESTAMP
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: de036526-9dd7-4231-84e7-7932cc3df5ea
+		summarizeBy: none
+		sourceColumn: ORDER_TIMESTAMP
+
+		variation Variation
+			isDefault
+			relationship: ff79f8e7-d2e4-43af-8d2d-3877d9e340f5
+			defaultHierarchy: LocalDateTable_fdf811d1-1f87-412d-9cbd-11d2cfad2390.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d640314f-6110-4d77-8efd-a7812c1f43d4
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		variation Variation
+			isDefault
+			relationship: 5578ef9f-0833-4c1d-b678-d59f53277278
+			defaultHierarchy: LocalDateTable_ed427112-eb56-482e-a8df-5eb2381a4221.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DAY_OF_WEEK
+		dataType: string
+		lineageTag: 6807ba49-886c-4111-87b3-713adf2a7bea
+		summarizeBy: none
+		sourceColumn: DAY_OF_WEEK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_OF_MONTH
+		dataType: double
+		lineageTag: 4237c231-f847-4273-8b84-8f54a9ce711f
+		summarizeBy: sum
+		sourceColumn: DAY_OF_MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WEEK_OF_YEAR
+		dataType: double
+		lineageTag: 87cc91fc-461c-4271-bf90-12e6a1b3cb4a
+		summarizeBy: sum
+		sourceColumn: WEEK_OF_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MONTH
+		dataType: double
+		lineageTag: 69e18a47-da74-48c9-8a2b-dee707af261e
+		summarizeBy: sum
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MONTH_NAME
+		dataType: string
+		lineageTag: af3080c7-ecd9-4de8-8aa9-f9df6b09c16a
+		summarizeBy: none
+		sourceColumn: MONTH_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTER
+		dataType: double
+		lineageTag: e60ff57a-b3f0-435a-8f6a-fb5129fa1962
+		summarizeBy: sum
+		sourceColumn: QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column YEAR
+		dataType: double
+		lineageTag: ff3530ca-8a2c-4969-a26b-a014b6e7d8fd
+		summarizeBy: sum
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: e51b0605-2cf2-4c3b-8a85-db2be0fe861f
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_ORDER_TIME = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=E-Commerce Data", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    DBT_SSACHDEVA_ANALYTICS_Schema = CUSTOMERS_DB_Database{[Name="DBT_SSACHDEVA_ANALYTICS",Kind="Schema"]}[Data],
+				    DIM_ORDER_TIME_Table = DBT_SSACHDEVA_ANALYTICS_Schema{[Name="DIM_ORDER_TIME",Kind="Table"]}[Data]
+				in
+				    DIM_ORDER_TIME_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,38 @@
+table Application_for_Leave_ACOM
+	lineageTag: 03b8bfc5-c6f3-4817-8f0c-1b155e40b312
+
+	column CaseType
+		lineageTag: 421e38b1-12fb-4750-a821-92f47b7e4ae8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CaseType]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValueID
+		formatString: 0
+		lineageTag: 0be19a6b-18a8-4cf1-bf39-1482bb51d992
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [ValueID]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Application_for_Leave_ACOM = calculated
+		mode: import
+		source = ```
+				DATATABLE(
+				    "CaseType", STRING,
+				    "ValueID", INTEGER,
+				    {
+				        {"Post Conviction", 578},
+				        {"Guilty Plea", 584},
+				        {"Other Miscellaneous", 596},
+				        {"Violation of Probation", 590}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = 36077268455d452a9558f95eefc0a25e
+

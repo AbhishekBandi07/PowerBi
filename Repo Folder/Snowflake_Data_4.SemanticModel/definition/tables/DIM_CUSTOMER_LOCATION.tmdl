@@ -1,0 +1,63 @@
+table DIM_CUSTOMER_LOCATION
+	lineageTag: aa421e64-1202-4f74-982f-2f93ea942445
+
+	column CUSTOMER_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 45b70002-d625-4885-80bb-1b7644dc578c
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_ZIP_CODE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 1b34ea5c-3a4c-4129-b19a-85fbce92165a
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ZIP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CITY
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: c46d3ee0-32c2-4ab9-ac2f-d56ea3079f39
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_STATE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 61d305b1-a713-4720-b5eb-d02cb1defc1a
+		summarizeBy: none
+		sourceColumn: CUSTOMER_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		sourceProviderType: nvarchar(128)
+		lineageTag: ff8e41b7-4749-4e9e-b291-6432559e7ec5
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_CUSTOMER_LOCATION = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("BPC06675.us-east-1.snowflakecomputing.com","POWERBI_TEST",[Implementation="2.0"]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_CUSTOMER_LOCATION_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_CUSTOMER_LOCATION",Kind="Table"]}[Data]
+				in
+				    DIM_CUSTOMER_LOCATION_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

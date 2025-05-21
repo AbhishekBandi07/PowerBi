@@ -1,0 +1,80 @@
+table 'public variable_county_jurisdiction_mapping'
+	lineageTag: c6b37395-ed95-4894-8b9a-f094ef161b5f
+
+	column variable_county_jurisdiction_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3fabeee8-de2c-4e2b-a8e1-df84508bb677
+		summarizeBy: sum
+		sourceColumn: variable_county_jurisdiction_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7b62ff4f-081e-48ac-8acb-1aefbde22e9a
+		summarizeBy: none
+		sourceColumn: variable_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column county_jurisdiction_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9c48c481-05fb-4d20-b905-49442efe4d15
+		summarizeBy: none
+		sourceColumn: county_jurisdiction_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 44a4d217-cfea-4dd1-82f7-cf09998da8d1
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: f3a9aeeb-f55d-4c93-939b-6e2cb192f1ab
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 534a9841-ee06-47f6-8728-43b39813e7dd
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public variable_county_jurisdiction_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_variable_county_jurisdiction_mapping = Source{[Schema="public",Item="variable_county_jurisdiction_mapping"]}[Data]
+				in
+				    public_variable_county_jurisdiction_mapping
+
+	annotation PBI_ResultType = Table
+

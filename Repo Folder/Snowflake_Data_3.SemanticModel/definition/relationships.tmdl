@@ -1,0 +1,69 @@
+relationship a887ffb5-51c9-47a1-b446-86c5f22d96a5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_CUSTOMER_BEHAVIOR.FIRST_ORDER_DATE
+	toColumn: LocalDateTable_31c274c9-1f99-48c6-a1d2-2a87b504e03b.Date
+
+relationship 4c25f6d6-365c-415e-904a-7873f364b57f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_CUSTOMER_BEHAVIOR.LAST_ORDER_DATE
+	toColumn: LocalDateTable_efaadd38-3160-4875-a1d0-7467a6939bd4.Date
+
+relationship 0008b2d3-02b2-412a-b319-75324366bd85
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_ORDER_STATUS.ORDER_PURCHASE_TIMESTAMP
+	toColumn: LocalDateTable_49aa99f5-d47f-40f7-b64e-b4622524331d.Date
+
+relationship 4a12d65c-ab42-405e-aa38-caacdf59dfc7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_ORDER_STATUS.ORDER_APPROVED_AT
+	toColumn: LocalDateTable_f63f90ac-beee-4ee5-9ab4-4b4a45438413.Date
+
+relationship d4c89cc4-f2df-446a-a376-85acd6dcb3e1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_ORDER_TIME.ORDER_TIMESTAMP
+	toColumn: LocalDateTable_8ba58453-124c-4cc4-9bfc-97482e4d00e6.Date
+
+relationship bc83bf36-b643-4465-b327-02acc949c955
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_ORDER_TIME.ORDER_DATE
+	toColumn: LocalDateTable_1e16b66c-f941-4361-b282-3757a41a65ad.Date
+
+relationship 7a5a7393-fe4c-4170-b78d-8ee5583b0b36
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'FACT_ORDER_ANALYSIS (2)'.FIRST_ORDER_DATE
+	toColumn: LocalDateTable_17d1822e-c619-4e75-8687-f953ecefd0b3.Date
+
+relationship c1ba561e-d1c9-4c76-af78-3573d699d805
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'FACT_ORDER_ANALYSIS (2)'.LAST_ORDER_DATE
+	toColumn: LocalDateTable_691871eb-b222-4bd7-89f9-eb4763119a1e.Date
+
+relationship AutoDetected_5b66cf61-cdec-41d8-ae9e-3b4c4eb6e6c0
+	fromColumn: 'FACT_ORDER_ANALYSIS (2)'.CUSTOMER_ID
+	toColumn: DIM_CUSTOMER_BEHAVIOR.CUSTOMER_ID
+
+relationship AutoDetected_4b4af603-6540-478b-bb42-5b7473408571
+	fromColumn: 'FACT_ORDER_ANALYSIS (2)'.ORDER_ID
+	toColumn: DIM_PAYMENTS.ORDER_ID
+
+relationship 366011db-70d6-bd70-f9eb-8579fda67db2
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'FACT_ORDER_ANALYSIS (2)'.TIME_ID
+	toColumn: DIM_ORDER_TIME.TIME_ID
+
+relationship c50a8f71-d0b5-0e66-0235-d84f83840a6d
+	fromColumn: 'FACT_ORDER_ANALYSIS (2)'.CUSTOMER_ID
+	toColumn: DIM_CUSTOMER_LOCATION.CUSTOMER_ID
+
+relationship e415ae4a-74d6-9a83-b271-38cadc19aacd
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: DIM_ORDER_STATUS.ORDER_ID
+	toColumn: 'FACT_ORDER_ANALYSIS (2)'.ORDER_ID
+
+relationship de9e1805-b34f-4e0f-a219-53d6a5c21d5e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DateTable.Date
+	toColumn: LocalDateTable_7816b209-28f4-4fa4-bb44-11346f18da8e.Date
+

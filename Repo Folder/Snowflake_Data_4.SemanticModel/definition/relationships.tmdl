@@ -1,0 +1,24 @@
+relationship 4ed5ac47-d051-5233-7c64-cbafa979d66a
+	fromColumn: FACT_ORDER_ANALYSIS.CUSTOMER_ID
+	toColumn: DIM_CUSTOMER_BEHAVIOR.CUSTOMER_ID
+
+relationship b3e21ac4-959d-47d5-1fdf-5ba2a8560fbd
+	fromColumn: FACT_ORDER_ANALYSIS.CUSTOMER_ID
+	toColumn: DIM_CUSTOMER_LOCATION.CUSTOMER_ID
+
+relationship 5af670ac-b767-f333-914d-d303c6a6819e
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: DIM_ORDER_STATUS.ORDER_ID
+	toColumn: FACT_ORDER_ANALYSIS.ORDER_ID
+
+relationship 696cfabf-f4ea-27ea-ffd0-603e96d00c72
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: DIM_ORDER_TIME.TIME_ID
+	toColumn: FACT_ORDER_ANALYSIS.TIME_ID
+
+relationship 6687f335-6651-0b71-8302-c7edd3b31cdf
+	fromColumn: FACT_ORDER_ANALYSIS.ORDER_ID
+	toColumn: DIM_PAYMENTS.ORDER_ID
+

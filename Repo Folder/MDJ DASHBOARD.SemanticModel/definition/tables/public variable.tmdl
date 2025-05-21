@@ -1,0 +1,129 @@
+table 'public variable'
+	lineageTag: 7c0ca45a-72f4-40f2-96af-cd315d71fab0
+
+	column variable_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: dbf1e387-22ff-4ff6-811a-eb5a499e401c
+		summarizeBy: none
+		sourceColumn: variable_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 87491611-f9e5-4289-85a5-2b1f396f86a8
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: b2117b0e-1c9b-4045-af9b-2a613f77494a
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 48793377-8cea-408d-a051-c64aaea301ef
+		summarizeBy: sum
+		sourceColumn: court_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_type_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 73f0c2c0-03b6-40da-99f4-140e5c167252
+		summarizeBy: none
+		sourceColumn: value_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column view_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 37c16af3-3224-4686-8b8b-18f9e2f8ff5b
+		summarizeBy: none
+		sourceColumn: view_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 561f61a7-2ef5-48f5-9a61-658051a804b8
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: c4a35301-f85c-430c-a264-4ac8242cb221
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 7e438553-bb77-487b-86c4-56a4082cb197
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7272b4b1-5f97-418b-83fb-b680d02256e5
+		summarizeBy: sum
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sort_order
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8f99bb1e-a879-47d3-a08a-873f34f74255
+		summarizeBy: sum
+		sourceColumn: sort_order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public variable' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_variable = Source{[Schema="public",Item="variable"]}[Data]
+				in
+				    public_variable
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,89 @@
+table 'public filter_options'
+	lineageTag: b73e6746-7b13-4775-9190-2efdc785297e
+
+	column filter_options_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 86c4c2e3-0cf7-4863-b1e7-4c15b92748c5
+		summarizeBy: sum
+		sourceColumn: filter_options_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 9799b8c7-7531-47af-a86c-52eb0905d38e
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 7b6a5bb9-0f48-41f4-823b-5c9d46191b99
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column filter_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6d8690a8-88ec-44bf-9271-00cd29ca8dc6
+		summarizeBy: none
+		sourceColumn: filter_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: b8324303-07c9-466d-8fb4-c26dd37ffdac
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 2fd12da5-2e9a-43e5-ab44-23fb6dad7110
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: bbd7f936-1a71-4fe3-b3c9-0c9f38af5e70
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public filter_options' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_filter_options = Source{[Schema="public",Item="filter_options"]}[Data]
+				in
+				    public_filter_options
+
+	annotation PBI_ResultType = Table
+

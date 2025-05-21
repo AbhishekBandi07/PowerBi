@@ -1,0 +1,516 @@
+table COMPARISION_MEASURES
+	lineageTag: 57cf8ee6-0ec0-4137-8966-ebaf5e207c07
+
+	measure TOTAL_FILINGS_DC_COMPARISION = ```
+			
+			VAR SelectedYear = SELECTEDVALUE(ACTIVITY_DC[FiscalYear])
+			VAR SelectedUploadID = 
+			    CALCULATE(
+			        MAX(ACTIVITY_DC[DataUploadID]),
+			        ACTIVITY_DC[FiscalYear] = SelectedYear
+			    )
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX(ACTIVITY_DC[CategoryFiscalYearIDs]),
+			        ACTIVITY_DC[FiscalYear] = SelectedYear
+			    )
+			VAR CategoryFYIDList = SUBSTITUTE(CategoryFYIDsString, ",", "|")
+			
+			VAR CurrentCaseType = SELECTEDVALUE('Case Type'[Case Type])
+			VAR ValueID = 
+			    SWITCH(
+			        CurrentCaseType,
+			        "Civil", 412,
+			        "Criminal", 413,
+			        "Motor Vehicle", 417,
+			        "Landlord Tenant", 484,
+			        "Peace Order & Domestic Violence", 433,
+			        BLANK()
+			    )
+			
+			RETURN
+			IF(
+			    NOT ISBLANK(ValueID),
+			    CALCULATE(
+			        SUM('public dashboard_data'[value]),
+			        'public dashboard_data'[is_active] = TRUE(),
+			        'public dashboard_data'[value_type_id] = 1,
+			        'public dashboard_data'[data_upload_id] = SelectedUploadID,
+			        'public dashboard_data'[value_id] = ValueID,
+			        'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 7,
+			        CONTAINSSTRING("|" & CategoryFYIDList & "|", "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|")
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 58a83043-4a80-4048-9cbe-6a2afc5abbc4
+
+	measure TOTAL_FILINGS_ACOM = ```
+			
+			VAR SelectedCaseType = SELECTEDVALUE('ACOM_F&D'[Label])  -- "Filings" or "Dispositions"
+			VAR SelectedFiscalYear = SELECTEDVALUE(ACTIVITY_ACOM[FiscalYear])
+			
+			VAR SelectedUploadID = 
+			    CALCULATE(
+			        MAX(ACTIVITY_ACOM[DataUploadIDs]),
+			        ACTIVITY_ACOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX(ACTIVITY_ACOM[CategoryFiscalYearIDs]),
+			        ACTIVITY_ACOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDList = SUBSTITUTE(CategoryFYIDsString, ",", "|")
+			VAR UploadIDList = SUBSTITUTE(SelectedUploadID, ",", "|")
+			
+			VAR SelectedCaseTypeAxis = SELECTEDVALUE('Case Type'[Case Type])
+			
+			-- Define value_ids based on case type
+			VAR CaseValueID =
+			    SWITCH(
+			        TRUE(),
+			        SelectedCaseTypeAxis = "Civil"      && SelectedCaseType = "Filings",        498,
+			        SelectedCaseTypeAxis = "Civil"      && SelectedCaseType = "Dispositions",   498,
+			        SelectedCaseTypeAxis = "Criminal"   && SelectedCaseType = "Filings",        499,
+			        SelectedCaseTypeAxis = "Criminal"   && SelectedCaseType = "Dispositions",   499,
+			        SelectedCaseTypeAxis = "Juvenile"   && SelectedCaseType = "Filings",        517,
+			        SelectedCaseTypeAxis = "Juvenile"   && SelectedCaseType = "Dispositions",   517,
+			        -- Default: fallback to summary (filings = 602, dispositions = 603)
+			        SelectedCaseType = "Filings",        602
+			    )
+			
+			RETURN
+			CALCULATE(
+			    SUM('public dashboard_data'[value]),
+			    'public dashboard_data'[is_active] = TRUE(),
+			    'public dashboard_data'[value_type_id] = IF(SelectedCaseType = "Filings", 1, 2),
+			    CONTAINSSTRING(
+			        "|" & UploadIDList & "|", 
+			        "|" & FORMAT('public dashboard_data'[data_upload_id], "0") & "|"
+			    ),
+			    'public dashboard_data'[value_id] = CaseValueID,
+			    'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 9,
+			    CONTAINSSTRING(
+			        "|" & CategoryFYIDList & "|", 
+			        "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|"
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 4772ac77-cc15-4492-bc07-07a6d008816e
+
+	measure TOTAL_DISPOSITIONS_ACOM = ```
+			
+			VAR SelectedCaseType = SELECTEDVALUE('ACOM_F&D'[Label])  -- "Filings" or "Dispositions"
+			VAR SelectedFiscalYear = SELECTEDVALUE(ACTIVITY_ACOM[FiscalYear])
+			
+			VAR SelectedUploadID = 
+			    CALCULATE(
+			        MAX(ACTIVITY_ACOM[DataUploadIDs]),
+			        ACTIVITY_ACOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX(ACTIVITY_ACOM[CategoryFiscalYearIDs]),
+			        ACTIVITY_ACOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDList = SUBSTITUTE(CategoryFYIDsString, ",", "|")
+			VAR UploadIDList = SUBSTITUTE(SelectedUploadID, ",", "|")
+			
+			VAR SelectedCaseTypeAxis = SELECTEDVALUE('Case Type'[Case Type])
+			
+			-- Define value_ids based on case type
+			VAR CaseValueID =
+			    SWITCH(
+			        TRUE(),
+			        SelectedCaseTypeAxis = "Civil"      && SelectedCaseType = "Filings",        498,
+			        SelectedCaseTypeAxis = "Civil"      && SelectedCaseType = "Dispositions",   498,
+			        SelectedCaseTypeAxis = "Criminal"   && SelectedCaseType = "Filings",        499,
+			        SelectedCaseTypeAxis = "Criminal"   && SelectedCaseType = "Dispositions",   499,
+			        SelectedCaseTypeAxis = "Juvenile"   && SelectedCaseType = "Filings",        517,
+			        SelectedCaseTypeAxis = "Juvenile"   && SelectedCaseType = "Dispositions",   517,
+			        -- Default: fallback to summary (filings = 602, dispositions = 603)
+			        SelectedCaseType = "Dispositions",        603
+			    )
+			
+			RETURN
+			CALCULATE(
+			    SUM('public dashboard_data'[value]),
+			    'public dashboard_data'[is_active] = TRUE(),
+			    'public dashboard_data'[value_type_id] = IF(SelectedCaseType = "Filings", 1, 2),
+			    CONTAINSSTRING(
+			        "|" & UploadIDList & "|", 
+			        "|" & FORMAT('public dashboard_data'[data_upload_id], "0") & "|"
+			    ),
+			    'public dashboard_data'[value_id] = CaseValueID,
+			    'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 9,
+			    CONTAINSSTRING(
+			        "|" & CategoryFYIDList & "|", 
+			        "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|"
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: d59e1232-a717-47f2-a6fa-4f185f357e4d
+
+	measure TOTAL_FILINGS_SCOM_COMPARISON = ```
+			
+			VAR SelectedCaseType = SELECTEDVALUE('ACOM_F&D'[Label])
+			VAR ValueID = 
+			    SWITCH(
+			        SelectedCaseType,
+			        "Civil", 423,
+			        "Criminal", 424,
+			        "Juvenile", 426,
+			        "Filings", 606,
+			        BLANK()
+			    )
+			
+			RETURN
+			IF(
+			    NOT ISBLANK(ValueID),
+			    SUMX(
+			        VALUES(ACTIVITY_SCOM[FiscalYear]),
+			        VAR CurrentYear = ACTIVITY_SCOM[FiscalYear]
+			
+			        VAR SelectedUploadID = 
+			            CALCULATE(
+			                MAX(ACTIVITY_SCOM[DataUploadIDs]),
+			                ACTIVITY_SCOM[FiscalYear] = CurrentYear
+			            )
+			
+			        VAR CategoryFYIDsString = 
+			            CALCULATE(
+			                MAX(ACTIVITY_SCOM[CategoryFiscalYearIDs]),
+			                ACTIVITY_SCOM[FiscalYear] = CurrentYear
+			            )
+			
+			        VAR CategoryFYIDList = SUBSTITUTE(CategoryFYIDsString, ",", "|")
+			
+			        RETURN
+			        CALCULATE(
+			            SUM('public dashboard_data'[value]),
+			            'public dashboard_data'[is_active] = TRUE(),
+			            'public dashboard_data'[value_type_id] = 47,  -- Only filings
+			            'public dashboard_data'[data_upload_id] = SelectedUploadID,
+			            'public dashboard_data'[value_id] = ValueID,
+			            'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 10,
+			            CONTAINSSTRING(
+			                "|" & CategoryFYIDList & "|", 
+			                "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|"
+			            )
+			        )
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 7f416edc-3be0-45a6-962c-e7638a3a2db7
+
+	measure TOTAL_DISPOSITIONSS_SCOM = ```
+			
+			VAR SelectedCaseType = SELECTEDVALUE('ACOM_F&D'[Label])  -- "Filings" or "Dispositions"
+			VAR SelectedFiscalYear = SELECTEDVALUE(ACTIVITY_SCOM[FiscalYear])
+			
+			VAR SelectedUploadID = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[DataUploadIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[CategoryFiscalYearIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDList = SUBSTITUTE(CategoryFYIDsString, ",", "|")
+			VAR UploadIDList = SUBSTITUTE(SelectedUploadID, ",", "|")
+			
+			VAR SelectedCaseTypeAxis = SELECTEDVALUE('Case Type'[Case Type])
+			
+			-- Define value_ids based on case type
+			VAR CaseValueID =
+			    SWITCH(
+			        TRUE(),
+			        SelectedCaseTypeAxis = "Civil"      && SelectedCaseType = "Filings",        423,
+			        SelectedCaseTypeAxis = "Civil"      && SelectedCaseType = "Dispositions",   423,
+			        SelectedCaseTypeAxis = "Criminal"   && SelectedCaseType = "Filings",        424,
+			        SelectedCaseTypeAxis = "Criminal"   && SelectedCaseType = "Dispositions",   424,
+			        SelectedCaseTypeAxis = "Juvenile"   && SelectedCaseType = "Filings",        426,
+			        SelectedCaseTypeAxis = "Juvenile"   && SelectedCaseType = "Dispositions",   426,
+			        -- Default: fallback to summary (filings = 602, dispositions = 603)
+			        SelectedCaseType = "Dispositions",        607
+			    )
+			
+			RETURN
+			CALCULATE(
+			    SUM('public dashboard_data'[value]),
+			    'public dashboard_data'[is_active] = TRUE(),
+			    'public dashboard_data'[value_type_id] = IF(SelectedCaseType = "Filings",47,48),
+			    CONTAINSSTRING(
+			        "|" & UploadIDList & "|", 
+			        "|" & FORMAT('public dashboard_data'[data_upload_id], "0") & "|"
+			    ),
+			    'public dashboard_data'[value_id] = CaseValueID,
+			    'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 10,
+			    CONTAINSSTRING(
+			        "|" & CategoryFYIDList & "|", 
+			        "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|"
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 8f49d8aa-4a2d-4201-9c3f-61cd6c225331
+
+	measure APPEALS-TOTAL_FILINGS = ```
+			
+			VAR SelectedCaseType = SELECTEDVALUE('ACOM_F&D'[Label])  -- "Filings" or "Dispositions"
+			VAR SelectedFiscalYear = SELECTEDVALUE(ACTIVITY_SCOM[FiscalYear])
+			
+			VAR SelectedUploadID = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[DataUploadIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[CategoryFiscalYearIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDList = SUBSTITUTE(CategoryFYIDsString, ",", "|")
+			VAR UploadIDList = SUBSTITUTE(SelectedUploadID, ",", "|")
+			
+			VAR SelectedCaseTypeAxis = SELECTEDVALUE('Case Type'[Case Type])
+			
+			-- Define value_id based on Case Type and Label
+			VAR CaseValueID =
+			    SWITCH(
+			        TRUE(),
+			        SelectedCaseTypeAxis = "Civil"      && SelectedCaseType = "Filings",        423,
+			        SelectedCaseTypeAxis = "Criminal"   && SelectedCaseType = "Filings",        424,
+			        SelectedCaseTypeAxis = "Juvenile"   && SelectedCaseType = "Filings",        426,
+			        SelectedCaseType = "Filings",        537
+			    )
+			
+			
+			RETURN
+			CALCULATE(
+			    SUM('public dashboard_data'[value]),
+			    'public dashboard_data'[is_active] = TRUE(),
+			    'public dashboard_data'[value_type_id] = 39,
+			    'public dashboard_data'[value_id] = CaseValueID,
+			    'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 10,
+			    CONTAINSSTRING("|" & UploadIDList & "|", "|" & FORMAT('public dashboard_data'[data_upload_id], "0") & "|"),
+			    CONTAINSSTRING("|" & CategoryFYIDList & "|", "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|")
+			)
+			
+			```
+		formatString: 0
+		lineageTag: ec550436-b905-4183-9c13-81a277c268fe
+
+	measure APPEALS-TOTAL_DISPOSITIONS = ```
+			
+			VAR SelectedCaseType = SELECTEDVALUE('ACOM_F&D'[Label])  -- "Filings" or "Dispositions"
+			VAR SelectedFiscalYear = SELECTEDVALUE(ACTIVITY_SCOM[FiscalYear])
+			
+			VAR SelectedUploadID = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[DataUploadIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[CategoryFiscalYearIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedFiscalYear
+			    )
+			
+			VAR CategoryFYIDList = SUBSTITUTE(CategoryFYIDsString, ",", "|")
+			VAR UploadIDList = SUBSTITUTE(SelectedUploadID, ",", "|")
+			
+			VAR SelectedCaseTypeAxis = SELECTEDVALUE('Case Type'[Case Type])
+			
+			-- Define value_id based on Case Type and Label
+			VAR CaseValueID =
+			    SWITCH(
+			        TRUE(),
+			        SelectedCaseTypeAxis = "Civil"      && SelectedCaseType = "Dispositions",        423,
+			        SelectedCaseTypeAxis = "Criminal"   && SelectedCaseType = "Dispositions",        424,
+			        SelectedCaseTypeAxis = "Juvenile"   && SelectedCaseType = "Dispositions",        426,
+			        SelectedCaseType = "Dispositions",      608
+			    )
+			
+			
+			RETURN
+			CALCULATE(
+			    SUM('public dashboard_data'[value]),
+			    'public dashboard_data'[is_active] = TRUE(),
+			    'public dashboard_data'[value_type_id] = 14,
+			    'public dashboard_data'[value_id] = CaseValueID,
+			    'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 10,
+			    CONTAINSSTRING("|" & UploadIDList & "|", "|" & FORMAT('public dashboard_data'[data_upload_id], "0") & "|"),
+			    CONTAINSSTRING("|" & CategoryFYIDList & "|", "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|")
+			)
+			
+			```
+		formatString: 0
+		lineageTag: e7a7540f-5940-40f5-ac60-b811374e2804
+
+	measure CERTIORARY_TOTAL_FILINGS = ```
+			
+			VAR SelectedCaseType = SELECTEDVALUE('ACOM_F&D'[Label])
+			VAR SelectedYear = SELECTEDVALUE(ACTIVITY_SCOM[FiscalYear])
+			VAR SelectedUploadID = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[DataUploadIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedYear
+			    )
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[CategoryFiscalYearIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedYear
+			    )
+			VAR CategoryFYIDList = 
+			    SUBSTITUTE(CategoryFYIDsString, ",", "|")  -- Temporarily use for CONTAINSSTRING workaround
+			
+			RETURN
+			SWITCH(
+			    SelectedCaseType,
+			
+			    "Filings", CALCULATE(
+			        SUM('public dashboard_data'[value]),
+			        'public dashboard_data'[is_active] = TRUE(),
+			        'public dashboard_data'[value_type_id] = 17,
+			        CONTAINSSTRING(
+			        "|" & SelectedUploadID & "|", 
+			        "|" & FORMAT('public dashboard_data'[data_upload_id], "0") & "|"
+			        ),
+			        'public dashboard_data'[value_id] = 538,
+			        'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 10,
+			        CONTAINSSTRING("|" & CategoryFYIDList & "|", "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|")
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 6a67ce1c-5aba-4554-8fb8-a1f6afb4b5da
+
+	measure CERTIORARY_TOTAL_DISPOSITIONS = ```
+			
+			VAR SelectedCaseType = SELECTEDVALUE('ACOM_F&D'[Label])
+			VAR SelectedYear = SELECTEDVALUE(ACTIVITY_SCOM[FiscalYear])
+			VAR SelectedUploadID = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[DataUploadIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedYear
+			    )
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[CategoryFiscalYearIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedYear
+			    )
+			VAR CategoryFYIDList = 
+			    SUBSTITUTE(CategoryFYIDsString, ",", "|")  -- Temporarily use for CONTAINSSTRING workaround
+			
+			RETURN
+			SWITCH(
+			    SelectedCaseType,
+			
+			      "Dispositions", CALCULATE(
+			        SUM('public dashboard_data'[value]),
+			        'public dashboard_data'[is_active] = TRUE(),
+			        'public dashboard_data'[value_type_id] = 18,
+			        CONTAINSSTRING(
+			        "|" & SelectedUploadID & "|", 
+			        "|" & FORMAT('public dashboard_data'[data_upload_id], "0") & "|"
+			        ),
+			        'public dashboard_data'[value_id] = 609,
+			        'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 10,
+			        CONTAINSSTRING("|" & CategoryFYIDList & "|", "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|")
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 65a9ed05-f50e-4eca-900a-cba5913954e0
+
+	measure SCOM_APPEALS_TOTAL_DOCKETED_COMPARISION = ```
+			
+			VAR SelectedCaseType = SELECTEDVALUE('Case Type'[Case Type])
+			VAR SelectedYear = SELECTEDVALUE(ACTIVITY_SCOM[FiscalYear])
+			VAR SelectedUploadID = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[DataUploadIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedYear
+			    )
+			VAR CategoryFYIDsString = 
+			    CALCULATE(
+			        MAX(ACTIVITY_SCOM[CategoryFiscalYearIDs]),
+			        ACTIVITY_SCOM[FiscalYear] = SelectedYear
+			    )
+			VAR CategoryFYIDList = 
+			    SUBSTITUTE(CategoryFYIDsString, ",", "|")  -- Temporarily use for CONTAINSSTRING workaround
+			
+			RETURN
+			SWITCH(
+			    SelectedCaseType,
+			
+			    "Civil", CALCULATE(
+			        SUM('public dashboard_data'[value]),
+			        'public dashboard_data'[is_active] = TRUE(),
+			        'public dashboard_data'[value_type_id] = 9,
+			        CONTAINSSTRING(
+			        "|" & SelectedUploadID & "|", 
+			        "|" & FORMAT('public dashboard_data'[data_upload_id], "0") & "|"
+			        ),
+			        'public dashboard_data'[value_id] = 610,
+			        'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 10,
+			        CONTAINSSTRING("|" & CategoryFYIDList & "|", "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|")
+			    ),
+			      "Criminal", CALCULATE(
+			        SUM('public dashboard_data'[value]),
+			        'public dashboard_data'[is_active] = TRUE(),
+			        'public dashboard_data'[value_type_id] = 9,
+			        CONTAINSSTRING(
+			        "|" & SelectedUploadID & "|", 
+			        "|" & FORMAT('public dashboard_data'[data_upload_id], "0") & "|"
+			        ),
+			        'public dashboard_data'[value_id] = 611,
+			        'public dashboard_data'[public.category_fiscal_year_mapping.category_id] = 10,
+			        CONTAINSSTRING("|" & CategoryFYIDList & "|", "|" & FORMAT('public dashboard_data'[category_fiscal_year_mapping_id], "0") & "|")
+			    )
+			    -- Repeat same pattern for Criminal, etc.
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 6385a5d6-4a2c-4b7f-8042-7b49bdbda50a
+
+	column Column
+		formatString: 0
+		lineageTag: a59b9810-802b-434e-8748-7b583b1bb443
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition COMPARISION_MEASURES = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 39b7b95f4fd2433bb477f410d7c496f7
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

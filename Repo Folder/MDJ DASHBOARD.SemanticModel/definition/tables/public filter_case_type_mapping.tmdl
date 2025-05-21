@@ -1,0 +1,80 @@
+table 'public filter_case_type_mapping'
+	lineageTag: cb4285ef-41e8-4167-806a-30b9d1b140b7
+
+	column filter_case_type_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: eed08648-3e19-4e1b-a82b-8c70b57c2e89
+		summarizeBy: sum
+		sourceColumn: filter_case_type_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 12035cf3-dce9-4c6b-b890-724baaeaafb4
+		summarizeBy: sum
+		sourceColumn: court_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_case_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ac90d05b-5708-450d-b8ce-ac03d30b67a1
+		summarizeBy: none
+		sourceColumn: court_case_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: c6d9f12e-0dda-48b1-bd9e-f93eb0aeb321
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 6b031320-7843-45f3-a88e-c5d860daf82f
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 5ad2550e-a0f4-4bf3-ab4a-af22c53b40fe
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public filter_case_type_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_filter_case_type_mapping = Source{[Schema="public",Item="filter_case_type_mapping"]}[Data]
+				in
+				    public_filter_case_type_mapping
+
+	annotation PBI_ResultType = Table
+

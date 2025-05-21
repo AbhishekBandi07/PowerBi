@@ -1,0 +1,82 @@
+table DIM_CUSTOMER_BEHAVIOR
+	lineageTag: 4a78996b-99d9-4020-adb8-527243bde8a2
+
+	column CUSTOMER_ID
+		dataType: string
+		lineageTag: 5cfad6c5-dc60-4c99-8351-4a8ba9e0e26f
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ORDERS_PLACED
+		dataType: double
+		lineageTag: 6c5d015a-65a8-4c6f-a560-c050e0229c7c
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS_PLACED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FIRST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 14edc1a7-9ea6-4f91-861b-26dd40a5f781
+		summarizeBy: none
+		sourceColumn: FIRST_ORDER_DATE
+
+		variation Variation
+			isDefault
+			relationship: 8943a1a8-ef90-40e4-9200-dd6b92a12fc0
+			defaultHierarchy: LocalDateTable_07a45a55-6b42-42bc-9ef6-de964852fb0c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5b789e2f-6f0f-4d35-821e-be0c46a05941
+		summarizeBy: none
+		sourceColumn: LAST_ORDER_DATE
+
+		variation Variation
+			isDefault
+			relationship: 3c672053-ab01-4b42-a668-c508636d64dd
+			defaultHierarchy: LocalDateTable_57000fcf-9a71-4421-9e70-149e3d7c501f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column AVERAGE_ORDER_VALUE
+		dataType: double
+		lineageTag: 8b3e0b48-4557-4bc8-a5c5-3b035f1fcc42
+		summarizeBy: sum
+		sourceColumn: AVERAGE_ORDER_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: 729d5a3c-8fa2-4186-8b7e-c7fab2395fb2
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_CUSTOMER_BEHAVIOR = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=E-Commerce Data", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    DBT_SSACHDEVA_ANALYTICS_Schema = CUSTOMERS_DB_Database{[Name="DBT_SSACHDEVA_ANALYTICS",Kind="Schema"]}[Data],
+				    DIM_CUSTOMER_BEHAVIOR_Table = DBT_SSACHDEVA_ANALYTICS_Schema{[Name="DIM_CUSTOMER_BEHAVIOR",Kind="Table"]}[Data]
+				in
+				    DIM_CUSTOMER_BEHAVIOR_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

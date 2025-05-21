@@ -1,0 +1,77 @@
+table DIM_PRODUCT_CATEGORY
+	lineageTag: 6d076f48-6f2e-4796-bdcf-7c0e56cf24db
+
+	column PRODUCT_CATEGORY_NAME
+		dataType: string
+		lineageTag: 9360007c-ddd0-49ef-9009-ae7f8642c7d6
+		summarizeBy: none
+		sourceColumn: PRODUCT_CATEGORY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ORDERS
+		dataType: double
+		lineageTag: 7ae505a1-fa98-4260-9b03-df163631c477
+		summarizeBy: none
+		sourceColumn: TOTAL_ORDERS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_REVENUE
+		dataType: double
+		lineageTag: 789bc06a-f08c-45bf-a965-3b7ef93108d0
+		summarizeBy: none
+		sourceColumn: TOTAL_REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_SHIPPING_CHARGES
+		dataType: double
+		lineageTag: e41cc9d9-5c45-46e4-b83c-7cf5ac6e85de
+		summarizeBy: none
+		sourceColumn: AVERAGE_SHIPPING_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Product_Category_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a80b7fe-4c8d-4b93-870e-144eac2702de
+		summarizeBy: none
+		sourceColumn: Product_Category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: feddf75c-c536-4f71-8c25-02607df031cc
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PRODUCT_CATEGORY = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=E-Commerce Data", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    DBT_SSACHDEVA_ANALYTICS_Schema = CUSTOMERS_DB_Database{[Name="DBT_SSACHDEVA_ANALYTICS",Kind="Schema"]}[Data],
+				    DIM_PRODUCT_CATEGORY_Table = DBT_SSACHDEVA_ANALYTICS_Schema{[Name="DIM_PRODUCT_CATEGORY",Kind="Table"]}[Data],
+				    #"Added Index" = Table.AddIndexColumn(DIM_PRODUCT_CATEGORY_Table, "Index", 0, 1, Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "Product_Category_id"}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Renamed Columns"),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Removed Duplicates", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

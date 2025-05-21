@@ -1,0 +1,255 @@
+table FACT_ORDER_ANALYSIS
+	lineageTag: 22a534b0-fcf4-4393-9d95-b31395d8ff40
+
+	column ORDER_ID
+		dataType: string
+		lineageTag: 8a78b63b-ff39-4846-8574-47df6770828c
+		summarizeBy: none
+		sourceColumn: ORDER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_ID
+		dataType: string
+		lineageTag: 6fbfc969-be46-400f-90f4-02834c3411e2
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TIME_ID
+		dataType: string
+		lineageTag: c7332334-525c-4288-9b6e-87cc4348acab
+		summarizeBy: none
+		sourceColumn: TIME_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_ID
+		dataType: string
+		lineageTag: 58357564-990e-4a0e-b711-89e33e30b10b
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CATEGORY_NAME
+		dataType: string
+		lineageTag: 261fd71d-7e17-4e5d-a66b-fca0fa735183
+		summarizeBy: none
+		sourceColumn: PRODUCT_CATEGORY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SELLER_ID
+		dataType: string
+		lineageTag: e96c0288-7978-4a35-b6b0-96f87468d074
+		summarizeBy: none
+		sourceColumn: SELLER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRICE
+		dataType: double
+		lineageTag: dd96580e-31d2-4780-af16-1cb781f71c12
+		summarizeBy: sum
+		sourceColumn: PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIPPING_CHARGES
+		dataType: double
+		lineageTag: ad51b09f-d92c-47a8-af3b-bbcb5ff8a816
+		summarizeBy: sum
+		sourceColumn: SHIPPING_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ORDER_VALUE
+		dataType: double
+		lineageTag: f7eb4853-de76-4c2d-b900-59c934726099
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDER_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_VALUE
+		dataType: double
+		lineageTag: 6a37deaf-6855-457c-b36f-d17639f0598a
+		summarizeBy: sum
+		sourceColumn: PAYMENT_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_TYPE
+		dataType: string
+		lineageTag: 722a6ba5-e4f7-4e7d-9e90-621f4de4eae8
+		summarizeBy: none
+		sourceColumn: PAYMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_INSTALLMENTS
+		dataType: double
+		lineageTag: 92677ff3-c27a-4a03-ba52-b48817475b45
+		summarizeBy: sum
+		sourceColumn: PAYMENT_INSTALLMENTS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDER_STATUS_CATEGORY
+		dataType: string
+		lineageTag: 8904022c-f014-46a7-9163-d8fbee568cd1
+		summarizeBy: none
+		sourceColumn: ORDER_STATUS_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_PROCESSING_TIME
+		dataType: double
+		lineageTag: 33183526-48e0-4b73-8180-467702a5f61b
+		summarizeBy: sum
+		sourceColumn: ORDER_PROCESSING_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER_ZIP_CODE
+		dataType: string
+		lineageTag: 3f28f372-9673-4a25-8eb2-f3f023891f4a
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ZIP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CITY
+		dataType: string
+		lineageTag: 03a7b396-1652-4c3c-a271-43ffd28af59e
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_STATE
+		dataType: string
+		lineageTag: 49d7950c-cf8a-48b0-85b1-99cf1eb72afb
+		summarizeBy: none
+		sourceColumn: CUSTOMER_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1cf63ebb-d184-403e-9861-4fa694863144
+		summarizeBy: none
+		sourceColumn: FIRST_ORDER_DATE
+
+		variation Variation
+			isDefault
+			relationship: bdcd191a-24d0-4084-ad72-b67e2d6eb77b
+			defaultHierarchy: LocalDateTable_2a1c98c5-068d-4eb2-95f6-6ea0f3f37be2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5888053f-128a-442b-a990-653b6fceb1f2
+		summarizeBy: none
+		sourceColumn: LAST_ORDER_DATE
+
+		variation Variation
+			isDefault
+			relationship: 0aff2754-465e-4999-babb-c8931e26b4bb
+			defaultHierarchy: LocalDateTable_2d62cf78-01e2-45aa-bd9f-028a06cec212.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ORDERS_BY_CUSTOMER
+		dataType: double
+		lineageTag: 3c6a2f22-1f4a-4f24-8a40-4060ebf279f5
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS_BY_CUSTOMER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_ORDER_VALUE_BY_CUSTOMER
+		dataType: double
+		lineageTag: 1980750a-1a0f-413f-878c-013c13978b2f
+		summarizeBy: sum
+		sourceColumn: AVERAGE_ORDER_VALUE_BY_CUSTOMER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ORDERS_PER_CATEGORY
+		dataType: double
+		lineageTag: 54b270cf-22f7-4868-b088-d3ebf4843de4
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS_PER_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_REVENUE_PER_CATEGORY
+		dataType: double
+		lineageTag: a07908a7-3fff-4dc4-b286-3e1e8f1186a0
+		summarizeBy: sum
+		sourceColumn: TOTAL_REVENUE_PER_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Product_Category_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9584020c-48c2-4ff5-bd7f-cea954e4543e
+		summarizeBy: none
+		sourceColumn: Product_Category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column FACT_COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: b4472b89-408f-4002-8733-0f40b5b8d559
+		summarizeBy: none
+		sourceColumn: FACT_COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_ORDER_ANALYSIS = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=E-Commerce Data", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    DBT_SSACHDEVA_ANALYTICS_Schema = CUSTOMERS_DB_Database{[Name="DBT_SSACHDEVA_ANALYTICS",Kind="Schema"]}[Data],
+				    FACT_ORDER_ANALYSIS_Table = DBT_SSACHDEVA_ANALYTICS_Schema{[Name="FACT_ORDER_ANALYSIS",Kind="Table"]}[Data],
+				    #"Added Index" = Table.AddIndexColumn(FACT_ORDER_ANALYSIS_Table, "Index", 0, 1, Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "Product_Category_id"}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Renamed Columns"),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Removed Duplicates", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

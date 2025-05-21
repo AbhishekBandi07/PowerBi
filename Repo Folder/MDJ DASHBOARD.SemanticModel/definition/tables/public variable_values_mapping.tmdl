@@ -1,0 +1,80 @@
+table 'public variable_values_mapping'
+	lineageTag: 2b1ba865-3f27-4949-a07b-382d184a7aaa
+
+	column variable_value_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 65e736d7-5b35-4c9d-8d65-e007d3365874
+		summarizeBy: sum
+		sourceColumn: variable_value_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f181ef37-2445-49ee-bc2c-a228a2a4ad13
+		summarizeBy: none
+		sourceColumn: variable_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 590c67cf-a97a-437e-8d9c-eae8ecc21ce6
+		summarizeBy: none
+		sourceColumn: value_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: bc7edd11-cf70-462f-86e6-339ad15c6a18
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 0bfd13f9-3b19-490c-8a27-f12f31b09bac
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 399c0b66-4a3f-4015-9191-30307fea3af4
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public variable_values_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_variable_values_mapping = Source{[Schema="public",Item="variable_values_mapping"]}[Data]
+				in
+				    public_variable_values_mapping
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,91 @@
+table 'public variable_case_type_mapping'
+	lineageTag: 65845eea-c4d1-4e1b-b167-356ffd4bcee3
+
+	column variable_case_type_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c6d47933-445d-4860-a0d9-7f1fbe12e3aa
+		summarizeBy: sum
+		sourceColumn: variable_case_type_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_case_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 26189f0c-f6c0-4958-a421-cc86ba465008
+		summarizeBy: none
+		sourceColumn: court_case_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column view_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9a557d0b-1474-4be7-b2eb-2929789a8469
+		summarizeBy: sum
+		sourceColumn: view_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 83a88fea-fbc0-4154-8cc7-93c6eec97ac2
+		summarizeBy: none
+		sourceColumn: variable_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 5b58dc4f-2bed-48fb-9296-fca1d81b14d8
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 648f7c72-54e6-4f76-9609-e37086581407
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: e8ef4059-221c-45d7-9f9e-ac629631cbc5
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public variable_case_type_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_variable_case_type_mapping = Source{[Schema="public",Item="variable_case_type_mapping"]}[Data]
+				in
+				    public_variable_case_type_mapping
+
+	annotation PBI_ResultType = Table
+

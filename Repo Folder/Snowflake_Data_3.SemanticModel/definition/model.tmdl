@@ -1,0 +1,36 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DIM_CUSTOMER_BEHAVIOR","DIM_CUSTOMER_LOCATION","DIM_ORDER_STATUS","DIM_ORDER_TIME","DIM_PAYMENTS","DIM_PRODUCT_CATEGORY","FACT_ORDER_ANALYSIS","FACT_ORDER_ANALYSIS (2)"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.143.878.0 (25.05)+b20aa3b866ec1b70879135a4e60e4b1301c75b21
+
+ref table DIM_CUSTOMER_BEHAVIOR
+ref table DateTableTemplate_cdbd7958-0f2d-4342-a86c-82e7f40d190f
+ref table LocalDateTable_31c274c9-1f99-48c6-a1d2-2a87b504e03b
+ref table LocalDateTable_efaadd38-3160-4875-a1d0-7467a6939bd4
+ref table DIM_CUSTOMER_LOCATION
+ref table DIM_ORDER_STATUS
+ref table LocalDateTable_49aa99f5-d47f-40f7-b64e-b4622524331d
+ref table LocalDateTable_f63f90ac-beee-4ee5-9ab4-4b4a45438413
+ref table DIM_ORDER_TIME
+ref table LocalDateTable_8ba58453-124c-4cc4-9bfc-97482e4d00e6
+ref table LocalDateTable_1e16b66c-f941-4361-b282-3757a41a65ad
+ref table DIM_PAYMENTS
+ref table DIM_PRODUCT_CATEGORY
+ref table Table
+ref table DateTable
+ref table 'FACT_ORDER_ANALYSIS (2)'
+ref table LocalDateTable_17d1822e-c619-4e75-8687-f953ecefd0b3
+ref table LocalDateTable_691871eb-b222-4bd7-89f9-eb4763119a1e
+ref table LocalDateTable_7816b209-28f4-4fa4-bb44-11346f18da8e
+
+ref cultureInfo en-US
+

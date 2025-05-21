@@ -1,0 +1,24 @@
+table 'Case Type'
+	lineageTag: 4f1a05e5-1cbc-4223-9f5c-f8b3af02b353
+
+	column 'Case Type'
+		dataType: string
+		lineageTag: 8a01d0a6-d63a-473c-9ed1-8f581ae9bb68
+		summarizeBy: none
+		sourceColumn: Case Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Case Type' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45Wcs4sy8xRitUBsooyczPzEiEc3/yS/CKFsNSMzOScVLCIT2JeSk5+UYpCSGpeYl4JWCwgNTE5VcG/KCW1SCGm1MDAyEzBJT83tbgkM1khLDM/JzUvGaLZLTE3M6cSzPQqLUvNywQZGgsA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Case Type" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Case Type", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

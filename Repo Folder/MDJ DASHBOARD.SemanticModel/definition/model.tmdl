@@ -1,0 +1,73 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["public account","public account_email_sent","public case_type_variable_mapping","public category","public category_fiscal_year_mapping","public circuit","public category_fiscal_year_month_mapping","public circuit_civil_case_type_group","public circuit_civil_case_type_group_mapping","public comissioner_data_duration_filter","public comparison","public county","public county_circuit_mapping","public county_district_mapping","public county_jurisdiction_mapping","public court","public court_fiscal_year_mapping","public court_variable_mapping","public dashboard_data","public data_upload","public data_upload_history","public district","public file","public filter","public filter_case_type_mapping","public filter_filing_by","public filter_options","public filter_values_mapping","public footnotes","public jurisdiction","public jwt","public month","public value_type","public values","public variable","public variable_case_type_mapping","public variable_county_jurisdiction_mapping","public variable_filing_by_mapping","public variable_value_type_mapping","public variable_values_mapping","public view_type","public court_case_type_mapping","ACTIVITY_MEASURES","Case Type","Business_Related_Workload"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.1277.0 (25.04)+014fde450f93691fc9537f0758d73d1c5df153ef
+
+annotation PBI_RemovedChildren = [{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"bdef30d3-f7da-42d3-be50-f9c6e3c3d3af","fromColumnLocalLineageTag":"2fcc7118-933d-4c82-b171-5063a97ea531","toTableLocalLineageTag":"8ebbf6b4-aa8b-4bee-90cc-5333e85cca68","toColumnLocalLineageTag":"e459bf9a-c0f0-4d94-a538-b58a49b6bdf2"}},"objectType":"Relationship"},{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"7698ef1b-77ab-46cc-83d5-f8268296cd52","fromColumnLocalLineageTag":"7b9bdddc-7700-430c-aa8c-e3aad71e65e7","toTableLocalLineageTag":"8ebbf6b4-aa8b-4bee-90cc-5333e85cca68","toColumnLocalLineageTag":"e459bf9a-c0f0-4d94-a538-b58a49b6bdf2"}},"objectType":"Relationship"},{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"bdc73e02-6a4e-4173-8f93-9d81f4d259e1","fromColumnLocalLineageTag":"20f71ac7-f9c8-42d0-854d-e8e39d6e4b40","toTableLocalLineageTag":"8ebbf6b4-aa8b-4bee-90cc-5333e85cca68","toColumnLocalLineageTag":"e459bf9a-c0f0-4d94-a538-b58a49b6bdf2"}},"objectType":"Relationship"},{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"b29dae09-64a1-473f-833a-0f5973103879","fromColumnLocalLineageTag":"34669530-372b-4b63-9ef2-2e2e44ff5059","toTableLocalLineageTag":"05422077-f778-478c-9e8c-7a9d36341131","toColumnLocalLineageTag":"13a747aa-6f9e-40a7-bf39-39f51d6b5697"}},"objectType":"Relationship"},{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"11dd8f36-98cd-48d6-94b7-c1160d0a79c6","fromColumnLocalLineageTag":"d7c773b2-d06d-4ee7-92ba-d3699596fa1f","toTableLocalLineageTag":"f8410616-8d56-4fc3-8e89-34a2c46975d3","toColumnLocalLineageTag":"14aad94f-115c-4f96-b566-98105dfdd7c5"}},"objectType":"Relationship"}]
+
+ref table 'public account'
+ref table 'public account_email_sent'
+ref table 'public case_type_variable_mapping'
+ref table 'public category'
+ref table 'public category_fiscal_year_mapping'
+ref table 'public circuit'
+ref table 'public category_fiscal_year_month_mapping'
+ref table 'public circuit_civil_case_type_group'
+ref table 'public circuit_civil_case_type_group_mapping'
+ref table 'public comissioner_data_duration_filter'
+ref table 'public comparison'
+ref table 'public county'
+ref table 'public county_circuit_mapping'
+ref table 'public county_district_mapping'
+ref table 'public county_jurisdiction_mapping'
+ref table 'public court'
+ref table 'public court_fiscal_year_mapping'
+ref table 'public court_variable_mapping'
+ref table 'public dashboard_data'
+ref table 'public data_upload'
+ref table 'public data_upload_history'
+ref table 'public district'
+ref table 'public file'
+ref table 'public filter'
+ref table 'public filter_case_type_mapping'
+ref table 'public filter_filing_by'
+ref table 'public filter_options'
+ref table 'public filter_values_mapping'
+ref table 'public footnotes'
+ref table 'public jurisdiction'
+ref table 'public jwt'
+ref table 'public month'
+ref table 'public value_type'
+ref table 'public values'
+ref table 'public variable'
+ref table 'public variable_case_type_mapping'
+ref table 'public variable_county_jurisdiction_mapping'
+ref table 'public variable_filing_by_mapping'
+ref table 'public variable_value_type_mapping'
+ref table 'public variable_values_mapping'
+ref table 'public view_type'
+ref table 'public court_case_type_mapping'
+ref table ACTIVITY_MEASURES
+ref table ACTIVITY_DC
+ref table ACTIVITY_CC
+ref table 'Case Type'
+ref table Business_Related_Workload
+ref table ACTIVITY_ACOM
+ref table ACOM_F&D
+ref table Application_for_Leave_ACOM
+ref table ACTIVITY_SCOM
+ref table SCOM_MISCELLENEOUS_F&D
+ref table COMPARISION_MEASURES
+ref table DATA_MEASURES
+
+ref cultureInfo en-US
+

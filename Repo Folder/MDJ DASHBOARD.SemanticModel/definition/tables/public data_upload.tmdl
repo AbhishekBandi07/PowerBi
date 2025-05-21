@@ -1,0 +1,165 @@
+table 'public data_upload'
+	lineageTag: bdc73e02-6a4e-4173-8f93-9d81f4d259e1
+
+	column data_upload_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9766b9e5-0010-4b49-b53e-22e9f623d7fa
+		summarizeBy: none
+		sourceColumn: data_upload_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column file_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5349e85c-feb8-4386-8bb4-35455ad87e6a
+		summarizeBy: none
+		sourceColumn: file_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 20f71ac7-f9c8-42d0-854d-e8e39d6e4b40
+		summarizeBy: sum
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_category_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ff582747-a9b4-4c4b-90ed-7502adac238f
+		summarizeBy: sum
+		sourceColumn: sub_category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_type_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 295063d1-2368-43a5-aad2-1c3f04f4ac39
+		summarizeBy: sum
+		sourceColumn: case_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: a5632797-0940-44cb-9a5a-10cad717b8f9
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration
+		dataType: string
+		lineageTag: c86a0e8b-3919-4854-933a-7754f63537ce
+		summarizeBy: none
+		sourceColumn: duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration_value
+		dataType: string
+		lineageTag: 733d0373-8bc8-4f7b-a413-bcba82930ece
+		summarizeBy: none
+		sourceColumn: duration_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 4a54a672-d004-4388-89d2-bb71ed44daf5
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_by
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2b1c2341-6fcf-412c-a9d2-1a44ceb9f0f9
+		summarizeBy: sum
+		sourceColumn: created_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column approved_by
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5c58b0da-5caf-4e25-b504-416ee35c7648
+		summarizeBy: sum
+		sourceColumn: approved_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 4e3f0ce1-f8fc-4098-8c86-eff894f71ca4
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 1385c0d1-d3c2-4bdd-9f81-175ba0c69022
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column notes
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: fd59d627-44f5-4610-93cf-a3688d575e01
+		summarizeBy: none
+		sourceColumn: notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column reason
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: c058aac6-7964-45ad-9baf-c4b1f361ba0a
+		summarizeBy: none
+		sourceColumn: reason
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public data_upload' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_data_upload = Source{[Schema="public",Item="data_upload"]}[Data]
+				in
+				    public_data_upload
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

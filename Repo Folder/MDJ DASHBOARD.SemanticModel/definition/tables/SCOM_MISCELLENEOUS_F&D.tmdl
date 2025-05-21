@@ -1,0 +1,29 @@
+table SCOM_MISCELLENEOUS_F&D
+	lineageTag: b6dd45f9-3296-4514-9502-df4e525b4f3b
+
+	column Label
+		lineageTag: cd2afe64-94fc-431f-9abe-c0022342fd39
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Label]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SCOM_MISCELLENEOUS_F&D = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE(
+				    "Label",STRING,
+				    {
+				        {"Attorney Grievance Proceedings"},
+				        {"Miscelleneous Appeals"},
+				        {"Bar Admission Character Matters"},
+				        {"Certified Questions of Law"}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = 87114e1715d742359ac55f9e1d35616e
+

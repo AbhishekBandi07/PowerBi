@@ -1,0 +1,78 @@
+table 'public circuit_civil_case_type_group_mapping'
+	lineageTag: 34201c01-9b74-4c2c-805c-e588a676cbd9
+
+	column circuit_civil_case_type_group_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6c57e0eb-b34f-471e-b1d3-72f595141729
+		summarizeBy: sum
+		sourceColumn: circuit_civil_case_type_group_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column circuit_civil_case_type_group_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 73f81329-507a-463c-854b-36c705ea0441
+		summarizeBy: none
+		sourceColumn: circuit_civil_case_type_group_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 490c5d7a-74cf-4b08-a24f-326cbf8c5679
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: a2061675-a6c0-49d8-b44c-c80982fae30b
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 4fed2e4c-11a8-4fe8-972a-046b8e14201e
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7fefe3ed-d23f-412c-b483-8ce39fb7126f
+		summarizeBy: none
+		sourceColumn: value_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public circuit_civil_case_type_group_mapping' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_circuit_civil_case_type_group_mapping = Source{[Schema="public",Item="circuit_civil_case_type_group_mapping"]}[Data]
+				in
+				    public_circuit_civil_case_type_group_mapping
+
+	annotation PBI_ResultType = Table
+

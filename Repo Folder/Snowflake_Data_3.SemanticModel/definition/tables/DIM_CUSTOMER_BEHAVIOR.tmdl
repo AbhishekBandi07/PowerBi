@@ -1,0 +1,80 @@
+table DIM_CUSTOMER_BEHAVIOR
+	lineageTag: 60fb0f11-2239-40b1-a18b-7c8fdd437645
+
+	column CUSTOMER_ID
+		dataType: string
+		lineageTag: 60d1e8a9-5cc3-43bc-a373-f71e4d221a37
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ORDERS_PLACED
+		dataType: double
+		lineageTag: 98be0e50-ff31-409f-bbbf-9f40eadeb680
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS_PLACED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FIRST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 47516ad8-fcca-4e23-8c97-73036d0ed409
+		summarizeBy: none
+		sourceColumn: FIRST_ORDER_DATE
+
+		variation Variation
+			isDefault
+			relationship: a887ffb5-51c9-47a1-b446-86c5f22d96a5
+			defaultHierarchy: LocalDateTable_31c274c9-1f99-48c6-a1d2-2a87b504e03b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ceca257b-a1ca-4950-a716-591e095128cd
+		summarizeBy: none
+		sourceColumn: LAST_ORDER_DATE
+
+		variation Variation
+			isDefault
+			relationship: 4c25f6d6-365c-415e-904a-7873f364b57f
+			defaultHierarchy: LocalDateTable_efaadd38-3160-4875-a1d0-7467a6939bd4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column AVERAGE_ORDER_VALUE
+		dataType: double
+		lineageTag: 34fece8c-dddc-4179-83cc-98ad8cbcf2fd
+		summarizeBy: sum
+		sourceColumn: AVERAGE_ORDER_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: fab3c395-9fa3-4ce0-88f0-5cac76a9fa1b
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_CUSTOMER_BEHAVIOR = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=Snowflake_Data_2", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_CUSTOMER_BEHAVIOR_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_CUSTOMER_BEHAVIOR",Kind="Table"]}[Data]
+				in
+				    DIM_CUSTOMER_BEHAVIOR_Table
+
+	annotation PBI_ResultType = Table
+

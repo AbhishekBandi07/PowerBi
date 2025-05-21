@@ -1,0 +1,120 @@
+table 'public filter'
+	lineageTag: 318a85d0-5fc3-4624-aaa1-17331fb12914
+
+	column filter_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 45c0bead-c046-4481-8745-7655796afa2b
+		summarizeBy: none
+		sourceColumn: filter_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 9940fabf-c9c7-4f7a-9794-61ed2cb30cad
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 545f1c1e-1092-4b87-a433-b18c5544c25f
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fb5636f6-b471-464f-b25c-b3e15bb2ea8d
+		summarizeBy: sum
+		sourceColumn: court_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column view_type_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f398ba24-67aa-46fe-abb0-e20d6ad816e1
+		summarizeBy: none
+		sourceColumn: view_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 88eed217-8e96-4033-849d-6f916d6734fb
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: f95929d3-4a9e-40a6-bafa-1bbd644d4165
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 030f0188-e067-40fb-87ae-7ba18ae09428
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d7b3e206-a55d-4255-a918-7f781f787d8b
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sort_order
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 41a4b609-624c-45c6-bc0d-844c699a9d00
+		summarizeBy: sum
+		sourceColumn: sort_order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public filter' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_filter = Source{[Schema="public",Item="filter"]}[Data]
+				in
+				    public_filter
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,56 @@
+table DIM_CUSTOMER_LOCATION
+	lineageTag: 1ae4edfa-517d-4a73-a19d-1b8aec41986f
+
+	column CUSTOMER_ID
+		dataType: string
+		lineageTag: 51bc8137-b8ae-42d3-ae63-46491c2c9017
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_ZIP_CODE
+		dataType: string
+		lineageTag: fc0b8440-af54-4e16-b9a6-56768036363b
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ZIP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CITY
+		dataType: string
+		lineageTag: b6c58b3a-4c4e-4f27-b0d8-25d818818efc
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_STATE
+		dataType: string
+		lineageTag: 7c910542-001b-4cc7-9f01-d5eaf08b7c9d
+		summarizeBy: none
+		sourceColumn: CUSTOMER_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: 4637c145-7c54-4c89-ba00-6e907e684857
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_CUSTOMER_LOCATION = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=Snowflake_Data_2", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_CUSTOMER_LOCATION_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_CUSTOMER_LOCATION",Kind="Table"]}[Data]
+				in
+				    DIM_CUSTOMER_LOCATION_Table
+
+	annotation PBI_ResultType = Table
+

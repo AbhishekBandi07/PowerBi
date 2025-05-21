@@ -1,0 +1,140 @@
+table M_MEASURES
+	lineageTag: 29ccc081-aa76-4984-9001-a4d2e6a44e87
+
+	measure M_Total_Revenue = SUM(FACT_ORDER_ANALYSIS[TOTAL_REVENUE_PER_CATEGORY])
+		lineageTag: 47a75e64-f1b5-44ee-ab45-bbfbd5bcb1f6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Total_Orders = COUNT(FACT_ORDER_ANALYSIS[ORDER_ID])
+		formatString: 0
+		lineageTag: 573d488c-8cc4-49d1-9cd4-17a252d41b19
+
+	measure M_Average_Order_Value = AVERAGE(FACT_ORDER_ANALYSIS[AVERAGE_ORDER_VALUE_BY_CUSTOMER])
+		lineageTag: c41f0eba-02fc-4e21-869a-bd23f00fedcc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Total_Payments = SUM(FACT_ORDER_ANALYSIS[PAYMENT_VALUE])
+		lineageTag: cf8a6cac-5d3c-4490-a1d4-55a67db61318
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'M_Total_No.of_Customers' = DISTINCTCOUNT(FACT_ORDER_ANALYSIS[CUSTOMER_ID])
+		formatString: 0
+		lineageTag: eb30d43e-f2e8-4164-a957-0da9d4067e9d
+
+	measure M_Total_Products_Sold = SUM(FACT_ORDER_ANALYSIS[TOTAL_ORDERS_BY_CUSTOMER])
+		lineageTag: e1a19a31-f17f-4753-b6c0-9c0ccc1f1a8a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Revenue_by_Product_Category = SUM(FACT_ORDER_ANALYSIS[TOTAL_REVENUE_PER_CATEGORY])
+		lineageTag: 7c8bb728-6482-4583-8fec-58929a252296
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Revenue_Per_Order = DIVIDE(SUM(FACT_ORDER_ANALYSIS[TOTAL_REVENUE_PER_CATEGORY]),COUNTROWS(FACT_ORDER_ANALYSIS))
+		lineageTag: 3f261505-a8cd-4547-b975-b235a66cae77
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Total_Shipping_Charges = SUM(FACT_ORDER_ANALYSIS[SHIPPING_CHARGES])
+		lineageTag: dc9df53f-47be-44df-9ac1-1aa09d454294
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Total_Payments_Installments = SUM(FACT_ORDER_ANALYSIS[PAYMENT_INSTALLMENTS])
+		lineageTag: 98789937-f513-4d21-a45e-c4ad7b76f252
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Avg_Order_Processing_Time = AVERAGE(FACT_ORDER_ANALYSIS[ORDER_PROCESSING_TIME])
+		lineageTag: a18e4f7f-62b7-484e-9411-0fc9ee6acc7a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Revenue_by_Location = CALCULATE(SUM(FACT_ORDER_ANALYSIS[TOTAL_REVENUE_PER_CATEGORY]),ALLEXCEPT(FACT_ORDER_ANALYSIS,FACT_ORDER_ANALYSIS[CUSTOMER_CITY],FACT_ORDER_ANALYSIS[CUSTOMER_STATE]))
+		lineageTag: 844238fb-a599-4722-8062-90450799ff58
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Orders_By_Customer_Behaviour = CALCULATE(COUNTROWS(FACT_ORDER_ANALYSIS),FACT_ORDER_ANALYSIS[FIRST_ORDER_DATE]>=DATE(2020,1,1))
+		formatString: 0
+		lineageTag: 7d66a4ff-5a1e-46b6-881b-3a1d0ee9e286
+
+	measure M_Revenue_by_Order_Status = CALCULATE(SUM(FACT_ORDER_ANALYSIS[TOTAL_REVENUE_PER_CATEGORY]),ALLEXCEPT(FACT_ORDER_ANALYSIS,FACT_ORDER_ANALYSIS[ORDER_STATUS_CATEGORY]))
+		lineageTag: cecb9aab-b272-4ca5-8e31-1492f63f1cda
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Customer_Lifetime_Value = CALCULATE(SUM(FACT_ORDER_ANALYSIS[TOTAL_REVENUE_PER_CATEGORY]),ALLEXCEPT(FACT_ORDER_ANALYSIS,FACT_ORDER_ANALYSIS[CUSTOMER_ID]))
+		lineageTag: d5a789d7-e124-4bd9-9da5-60c459718ff1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_YoY_Revenue_Growth = ```
+			
+			VAR LastYearRevenue = 
+			    CALCULATE(
+			        SUM(fact_order_analysis[total_revenue_per_category]),
+			        SAMEPERIODLASTYEAR(dim_order_time[order_date])
+			    )
+			VAR CurrentYearRevenue = 
+			    SUM(fact_order_analysis[total_revenue_per_category])
+			RETURN
+			    DIVIDE(CurrentYearRevenue - LastYearRevenue, LastYearRevenue, 0)
+			
+			```
+		lineageTag: a28dd1ce-e387-409e-a1f1-839d17a74125
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Orders_By_Quarter =
+			CALCULATE(
+			    COUNTROWS(FACT_ORDER_ANALYSIS),
+			    ALLEXCEPT(FACT_ORDER_ANALYSIS,
+			    DIM_ORDER_TIME[QUARTER]))
+		formatString: 0
+		lineageTag: 74b3665a-7a3c-4275-b5db-6b1e90bac722
+
+	measure M_Payments_Method_Breakdown =
+			CALCULATE(SUM(FACT_ORDER_ANALYSIS[PAYMENT_VALUE]),
+			ALLEXCEPT(FACT_ORDER_ANALYSIS,FACT_ORDER_ANALYSIS[PAYMENT_TYPE]))
+		lineageTag: 79514a18-6237-490a-bd42-f96ead9b4ebd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Last_Year_Total_Revenue = ```
+			
+			CALCULATE(
+			    [M_Total_Revenue], 
+			    SAMEPERIODLASTYEAR(DIM_ORDER_TIME[ORDER_DATE])
+			)
+			
+			```
+		lineageTag: 68536540-88a8-4160-8a39-4908eccdf476
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure M_Total_Orders_2 = COUNTROWS(DISTINCT(FACT_ORDER_ANALYSIS))
+		formatString: 0
+		lineageTag: 83cc4668-02c0-44e6-9f47-0d6dc7f14361
+
+	column Column
+		formatString: 0
+		lineageTag: c66ba342-dcad-436a-89dd-d77b512718e0
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition M_MEASURES = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 25cb1403e7284f508666d63e66e52690
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

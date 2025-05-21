@@ -1,0 +1,30 @@
+table DateTable
+	lineageTag: fbb69f20-5193-45de-b88b-d3bca8f60ff8
+
+	column Date
+		formatString: General Date
+		lineageTag: 2be5a565-50ae-4bad-be55-9fa457167e62
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: de9e1805-b34f-4e0f-a219-53d6a5c21d5e
+			defaultHierarchy: LocalDateTable_7816b209-28f4-4fa4-bb44-11346f18da8e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DateTable = calculated
+		mode: import
+		source = ```
+				
+				CALENDAR(
+				    MIN('FACT_ORDER_ANALYSIS (2)'[FIRST_ORDER_DATE]), 
+				    MAX('FACT_ORDER_ANALYSIS (2)'[LAST_ORDER_DATE])
+				)
+				
+				```
+
+	annotation PBI_Id = dc524b089eda48e98e8e0ccfa41c8dbb
+

@@ -1,0 +1,126 @@
+table 'public account'
+	lineageTag: e185ba81-d478-4d1f-bee0-ff969347caad
+
+	measure Total = SUM('public value_type'[public.dashboard_data.value])
+		formatString: 0
+		lineageTag: 611fceb6-0dda-41a7-8d68-41fd51b7992e
+
+	measure District_Court_Civil_2k22 = ```
+			
+			CALCULATE(
+			    SUM('public dashboard_data'[value]),
+			    'public dashboard_data'[is_active] = TRUE(),
+			    'public dashboard_data'[value_type_id] IN {1},   -- example court case type IDs
+			    'public dashboard_data'[data_upload_id] IN {665},           -- example category IDs
+			    'public dashboard_data'[value_id] IN {412},            -- example county IDs
+			    'public dashboard_data'[category_fiscal_year_mapping_id] IN {370},
+			    'public dashboard_data'[public.category_fiscal_year_mapping.category_id] IN {7}
+			)
+			
+			```
+		lineageTag: fb1d64d0-97a4-4f5b-9a8b-491ce7a17c64
+
+	column account_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0bc30537-ac94-4a43-a963-7a97677145a5
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 0f8cb62a-7441-40ee-97ef-45464026dcbe
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 03c4eca0-843d-4597-8375-88ecc3804a6d
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 4699825d-b67d-4fcf-814c-f10652ccff2f
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column password
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 153f12d4-8698-4f76-86c2-8e363643f81f
+		summarizeBy: none
+		sourceColumn: password
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 80b545d9-6927-4816-85b6-4f863ddef365
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 2b04e779-fea6-4dc0-8ba7-e283214005ab
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: ccab16af-8cef-491a-b989-11ccd7176637
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column role
+		dataType: string
+		lineageTag: e67bc66f-7fbc-4272-b482-cdcf2f5b15ef
+		summarizeBy: none
+		sourceColumn: role
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public account' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_account = Source{[Schema="public",Item="account"]}[Data]
+				in
+				    public_account
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

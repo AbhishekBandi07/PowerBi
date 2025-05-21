@@ -1,0 +1,43 @@
+table Dashboard
+	lineageTag: bfb9408b-e766-4e9d-be73-b9390c419e1d
+
+	column Status
+		dataType: string
+		lineageTag: e2e6b3df-fe81-409c-a4c9-7dbfa3fce003
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Approved By Sales Rep'
+		dataType: string
+		lineageTag: a362c9db-5f47-4056-a4c6-da0b20f13325
+		summarizeBy: none
+		sourceColumn: Approved By Sales Rep
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column3
+		dataType: string
+		lineageTag: 10390f9e-3d8d-47ae-8e52-6a15e95b290b
+		summarizeBy: none
+		sourceColumn: Column3
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dashboard = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\bandi.abhishek_infoj\Downloads\Raw-Data-4-Abhishek-20250130.xlsx"), null, true),
+				    Dashboard_Sheet = Source{[Item="Dashboard",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Dashboard_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Status", type text}, {"Approved By Sales Rep", type text}, {"Column3", type any}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each ([Status] = "HWL - Healthcare Workforce Logistics"))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

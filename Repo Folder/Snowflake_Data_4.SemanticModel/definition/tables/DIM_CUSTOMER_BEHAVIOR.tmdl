@@ -1,0 +1,78 @@
+table DIM_CUSTOMER_BEHAVIOR
+	lineageTag: eb984081-6b55-4807-9ecb-c683a599513b
+
+	column CUSTOMER_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 133c859e-84e3-4b21-8511-f4e3e047bbc4
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ORDERS_PLACED
+		dataType: double
+		sourceProviderType: decimal(18, 0)
+		lineageTag: 12a18c04-ff4d-4ed8-88be-6b5adadff9a5
+		summarizeBy: none
+		sourceColumn: TOTAL_ORDERS_PLACED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FIRST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: e5a68160-8f3d-4723-9b71-ccc97f530999
+		summarizeBy: none
+		sourceColumn: FIRST_ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 11532439-97c0-4859-9a36-2c3f0de33e5e
+		summarizeBy: none
+		sourceColumn: LAST_ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AVERAGE_ORDER_VALUE
+		dataType: double
+		sourceProviderType: double
+		lineageTag: e5e184ea-e863-492a-b315-170b90ef0af9
+		summarizeBy: none
+		sourceColumn: AVERAGE_ORDER_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		sourceProviderType: nvarchar(128)
+		lineageTag: 17f46378-dc59-4ba2-92f8-211bcdbcc895
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_CUSTOMER_BEHAVIOR = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("BPC06675.us-east-1.snowflakecomputing.com","POWERBI_TEST",[Implementation="2.0"]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_CUSTOMER_BEHAVIOR_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_CUSTOMER_BEHAVIOR",Kind="Table"]}[Data]
+				in
+				    DIM_CUSTOMER_BEHAVIOR_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

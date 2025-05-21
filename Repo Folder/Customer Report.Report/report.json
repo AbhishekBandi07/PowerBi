@@ -1,0 +1,114 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.61\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "70bab2da83e4ad7e35db",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"0a09a4f6948ee42dcc48\",\"layouts\":[{\"id\":0,\"position\":{\"x\":692.1232385956532,\"y\":56.25029854310963,\"z\":3000,\"width\":183.42488655361834,\"height\":255.57200859804158,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"TARGET_TABLE.COUNTRY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"TARGET_TABLE\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COUNTRY\"},\"Name\":\"TARGET_TABLE.COUNTRY\",\"NativeReferenceName\":\"COUNTRY\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'COUNTRY'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 255.57,
+          "width": 183.42,
+          "x": 692.12,
+          "y": 56.25,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"2afed2a4436bb417e38a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":508.69835204203486,\"y\":56.25029854310963,\"z\":2000,\"width\":183.42488655361834,\"height\":255.57200859804158,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"TARGET_TABLE.CITY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"TARGET_TABLE\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"CITY\"},\"Name\":\"TARGET_TABLE.CITY\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"CITY\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'CITY'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 255.57,
+          "width": 183.42,
+          "x": 508.70,
+          "y": 56.25,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"661a820d481c6b5b633b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":312.1621621621622,\"z\":0,\"width\":1041.8918918918919,\"height\":408.1081081081081,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"TARGET_TABLE.CUSTOMER\"},{\"queryRef\":\"TARGET_TABLE.FULL_NAME\"},{\"queryRef\":\"TARGET_TABLE.PHONE_1\"},{\"queryRef\":\"TARGET_TABLE.COMPANY\"},{\"queryRef\":\"TARGET_TABLE.COUNTRY\"},{\"queryRef\":\"TARGET_TABLE.CITY\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"TARGET_TABLE\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"CUSTOMER\"},\"Name\":\"TARGET_TABLE.CUSTOMER\",\"NativeReferenceName\":\"CUSTOMER\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"PHONE_1\"},\"Name\":\"TARGET_TABLE.PHONE_1\",\"NativeReferenceName\":\"PHONE\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COMPANY\"},\"Name\":\"TARGET_TABLE.COMPANY\",\"NativeReferenceName\":\"COMPANY\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COUNTRY\"},\"Name\":\"TARGET_TABLE.COUNTRY\",\"NativeReferenceName\":\"COUNTRY\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"CITY\"},\"Name\":\"TARGET_TABLE.CITY\",\"NativeReferenceName\":\"CITY\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"FULL_NAME\"},\"Name\":\"TARGET_TABLE.FULL_NAME\",\"NativeReferenceName\":\"NAME\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"CUSTOMER\"}}}]},\"columnProperties\":{\"TARGET_TABLE.FULL_NAME\":{\"displayName\":\"NAME\"},\"TARGET_TABLE.PHONE_1\":{\"displayName\":\"PHONE\"}},\"drillFilterOtherVisuals\":true,\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"stylePreset\":[{\"properties\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Condensed'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 408.11,
+          "width": 1041.89,
+          "x": 0.00,
+          "y": 312.16,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"6ea1072b7d698993d100\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1041.8533556245523,\"y\":311.8223071411512,\"z\":8000,\"width\":238.45235251970385,\"height\":408.42608072605685,\"tabOrder\":8000}}],\"singleVisual\":{\"visualType\":\"barChart\",\"projections\":{\"Category\":[{\"queryRef\":\"TARGET_TABLE.COUNTRY\",\"active\":true}],\"Y\":[{\"queryRef\":\"CountNonNull(TARGET_TABLE.SUBSCRIPTION)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"TARGET_TABLE\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COUNTRY\"},\"Name\":\"TARGET_TABLE.COUNTRY\",\"NativeReferenceName\":\"COUNTRY\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"SUBSCRIPTION\"}},\"Function\":5},\"Name\":\"CountNonNull(TARGET_TABLE.SUBSCRIPTION)\",\"NativeReferenceName\":\"Count of SUBSCRIPTION\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"SUBSCRIPTION\"}},\"Function\":5}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"ribbonBands\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"dataPoint\":[{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}},\"fillTransparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"title\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 408.43,
+          "width": 238.45,
+          "x": 1041.85,
+          "y": 311.82,
+          "z": 8000.00
+        },
+        {
+          "config": "{\"name\":\"a50b252a7db4dab36421\",\"layouts\":[{\"id\":0,\"position\":{\"x\":875.5481251492715,\"y\":56.25029854310963,\"z\":7000,\"width\":196.8760449008837,\"height\":255.57200859804158,\"tabOrder\":7000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"TARGET_TABLE.SUBSCRIPTION\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"TARGET_TABLE\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"SUBSCRIPTION\"},\"Name\":\"TARGET_TABLE.SUBSCRIPTION\",\"NativeReferenceName\":\"SUBSCRIPTION_DATE\"}]},\"columnProperties\":{\"TARGET_TABLE.SUBSCRIPTION\":{\"displayName\":\"SUBSCRIPTION_DATE\",\"formatString\":\"G\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"singleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'SUBSCRIPTION_DATE'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'left'\"}}}}}],\"padding\":[{\"properties\":{\"left\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 255.57,
+          "width": 196.88,
+          "x": 875.55,
+          "y": 56.25,
+          "z": 7000.00
+        },
+        {
+          "config": "{\"name\":\"b6e8da04d3b3551e758d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1072.5,\"y\":56.25,\"z\":4000,\"width\":207.5,\"height\":126.25,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"kpi\",\"projections\":{\"Indicator\":[{\"queryRef\":\"CountNonNull(TARGET_TABLE.SUBSCRIPTION)\"}],\"TrendLine\":[{\"queryRef\":\"TARGET_TABLE.COUNTRY\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"TARGET_TABLE\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"SUBSCRIPTION\"}},\"Function\":5},\"Name\":\"CountNonNull(TARGET_TABLE.SUBSCRIPTION)\",\"NativeReferenceName\":\"SUBSCRIPTION\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COUNTRY\"},\"Name\":\"TARGET_TABLE.COUNTRY\",\"NativeReferenceName\":\"COUNTRY\"}]},\"drillFilterOtherVisuals\":true,\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"title\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 126.25,
+          "width": 207.50,
+          "x": 1072.50,
+          "y": 56.25,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"e4a13fd600484d0a9908\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":6000,\"width\":1280,\"height\":55.714285714285715,\"tabOrder\":6000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Customer Report\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"24pt\",\"color\":\"#ffffff\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#252423'\"}}}}}}}],\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"2D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 55.71,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 6000.00
+        },
+        {
+          "config": "{\"name\":\"e5eed6c5b521e3604604\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":56.25029854310963,\"z\":1000,\"width\":508.69835204203486,\"height\":255.57200859804158,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"filledMap\",\"projections\":{\"Category\":[{\"queryRef\":\"TARGET_TABLE.COUNTRY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"TARGET_TABLE\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COUNTRY\"},\"Name\":\"TARGET_TABLE.COUNTRY\",\"NativeReferenceName\":\"COUNTRY\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"dataPoint\":[{\"properties\":{\"fillRule\":{\"linearGradient2\":{\"min\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'minColor'\"}}}},\"max\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'maxColor'\"}}}},\"nullColoringStrategy\":{\"strategy\":{\"expr\":{\"Literal\":{\"Value\":\"'asZero'\"}}}}}},\"fill\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}}}}],\"mapStyles\":[{\"properties\":{\"mapTheme\":{\"expr\":{\"Literal\":{\"Value\":\"'canvasLight'\"}}},\"showLabels\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"mapControls\":[{\"properties\":{\"autoZoom\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"showZoomButtons\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"showLassoButton\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"geocodingCulture\":{\"expr\":{\"Literal\":{\"Value\":\"'en-US'\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 255.57,
+          "width": 508.70,
+          "x": 0.00,
+          "y": 56.25,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"f7bd80ec35b8c55a0430\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1072.4241700501552,\"y\":182.20205397659421,\"z\":5000,\"width\":207.8815380941008,\"height\":129.62025316455697,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"kpi\",\"projections\":{\"Indicator\":[{\"queryRef\":\"CountNonNull(TARGET_TABLE.SUBSCRIPTION)\"}],\"TrendLine\":[{\"queryRef\":\"TARGET_TABLE.CITY\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"TARGET_TABLE\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"SUBSCRIPTION\"}},\"Function\":5},\"Name\":\"CountNonNull(TARGET_TABLE.SUBSCRIPTION)\",\"NativeReferenceName\":\"SUBSCRIPTION\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"CITY\"},\"Name\":\"TARGET_TABLE.CITY\",\"NativeReferenceName\":\"CITY\"}]},\"drillFilterOtherVisuals\":true,\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"title\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 129.62,
+          "width": 207.88,
+          "x": 1072.42,
+          "y": 182.20,
+          "z": 5000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

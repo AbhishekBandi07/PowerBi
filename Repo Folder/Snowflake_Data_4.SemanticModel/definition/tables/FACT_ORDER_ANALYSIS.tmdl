@@ -1,0 +1,251 @@
+table FACT_ORDER_ANALYSIS
+	lineageTag: 48720ee4-1954-409f-987d-0cb86c983638
+
+	measure TOTAL = COUNTROWS(FACT_ORDER_ANALYSIS)
+		formatString: 0
+		lineageTag: 53e1b8a3-4cce-4018-b1e0-ca2acedd4726
+
+	column ORDER_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 995a84c1-9d1b-440c-8969-6dcfbd3c5069
+		summarizeBy: none
+		sourceColumn: ORDER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 187e271f-789e-4073-ace8-67c65556b1f9
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TIME_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 0b1252d1-ca3f-40d4-9391-902975c0b018
+		summarizeBy: none
+		sourceColumn: TIME_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 8e81ac78-d058-4e46-9568-a3f67f081420
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CATEGORY_NAME
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 08cb2fdc-a1bc-4c9d-b69f-26f406b0e2c7
+		summarizeBy: none
+		sourceColumn: PRODUCT_CATEGORY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SELLER_ID
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: a1a6c0c4-9f95-4947-bff7-2b1a74171626
+		summarizeBy: none
+		sourceColumn: SELLER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRICE
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 786fe5f0-4fd0-488c-a3cc-42126f8107df
+		summarizeBy: sum
+		sourceColumn: PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIPPING_CHARGES
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 5edd7a1e-13e0-447c-8de7-06d25c17829c
+		summarizeBy: sum
+		sourceColumn: SHIPPING_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ORDER_VALUE
+		dataType: double
+		sourceProviderType: double
+		lineageTag: ab45ac0f-5e4d-4275-ac11-9aa3ac83ffd6
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDER_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_VALUE
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 8ebd96c9-0210-462a-a15e-f651cbe8fded
+		summarizeBy: sum
+		sourceColumn: PAYMENT_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_TYPE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 92ade6dc-95de-405a-b152-d8eb8d130ec5
+		summarizeBy: none
+		sourceColumn: PAYMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_INSTALLMENTS
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 81628c14-2429-4356-a6e4-2cb893755036
+		summarizeBy: sum
+		sourceColumn: PAYMENT_INSTALLMENTS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDER_STATUS_CATEGORY
+		dataType: string
+		sourceProviderType: nvarchar(16)
+		lineageTag: 443e41e4-02bb-4788-a031-7408ce94e449
+		summarizeBy: none
+		sourceColumn: ORDER_STATUS_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_PROCESSING_TIME
+		dataType: double
+		sourceProviderType: decimal(18, 0)
+		lineageTag: db6abf41-9af8-448d-87ab-955c6959fc26
+		summarizeBy: sum
+		sourceColumn: ORDER_PROCESSING_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER_ZIP_CODE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 40f8c57f-c48c-428b-84d3-01af2cde553f
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ZIP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CITY
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: abf6d14e-4039-4224-87a7-3dee260ba4d6
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_STATE
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 94586545-61a6-492c-b1f7-7807ff1b59ee
+		summarizeBy: none
+		sourceColumn: CUSTOMER_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIRST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: fa452049-942d-4f3d-beaf-884056e1c58b
+		summarizeBy: none
+		sourceColumn: FIRST_ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: d1f14caf-16ca-4f15-acca-6579a3233d64
+		summarizeBy: none
+		sourceColumn: LAST_ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ORDERS_BY_CUSTOMER
+		dataType: double
+		sourceProviderType: decimal(18, 0)
+		lineageTag: 49a86087-ff63-4a7f-8f8b-5b6613686bcb
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS_BY_CUSTOMER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_ORDER_VALUE_BY_CUSTOMER
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 3d226927-8d76-41fd-8965-510842b63896
+		summarizeBy: sum
+		sourceColumn: AVERAGE_ORDER_VALUE_BY_CUSTOMER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ORDERS_PER_CATEGORY
+		dataType: double
+		sourceProviderType: decimal(18, 0)
+		lineageTag: 17f90165-9033-4229-8f97-19809ec886a5
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS_PER_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_REVENUE_PER_CATEGORY
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 70c26c13-a661-4e79-8669-3c629a7a24af
+		summarizeBy: sum
+		sourceColumn: TOTAL_REVENUE_PER_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FACT_ORDER_ANALYSIS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("BPC06675.us-east-1.snowflakecomputing.com","POWERBI_TEST",[Implementation="2.0"]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    FACT_ORDER_ANALYSIS_Table = CUSTOMERS_SCHEMA_Schema{[Name="FACT_ORDER_ANALYSIS",Kind="Table"]}[Data]
+				in
+				    FACT_ORDER_ANALYSIS_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Healthcare sector Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9ae32d36-8a9b-9162-4908-65e695bb12f1"
+  }
+}

@@ -1,0 +1,347 @@
+relationship 84748ebf-4015-464c-894d-e5d80577ba18
+	fromColumn: 'public account_email_sent'.account_id
+	toColumn: 'public account'.account_id
+
+relationship a120bcd2-915e-285a-9e9a-573a22ece727
+	fromColumn: 'public dashboard_data'.county_id
+	toColumn: 'public county'.county_id
+
+relationship f79785b9-a626-79c9-dfb9-b0d1418c4869
+	fromColumn: 'public dashboard_data'.court_fiscal_year_mapping_id
+	toColumn: 'public court_fiscal_year_mapping'.court_fiscal_year_mapping_id
+
+relationship 6f2fba2a-d94f-46fb-1334-3672ca45c17e
+	fromColumn: 'public dashboard_data'.data_upload_id
+	toColumn: 'public data_upload'.data_upload_id
+
+relationship 490cb048-fe76-30ef-2915-424b77dee419
+	fromColumn: 'public dashboard_data'.value_type_id
+	toColumn: 'public value_type'.value_type_id
+
+relationship d5dd4477-df91-3893-ec14-d66cf06d4838
+	fromColumn: 'public dashboard_data'.category_fiscal_year_mapping_id
+	toColumn: 'public category_fiscal_year_mapping'.category_fiscal_year_mapping_id
+
+relationship b5e59f5a-e30f-6a87-0745-f0ecb3da0245
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'public file'.file_id
+	toColumn: 'public data_upload'.file_id
+
+relationship 930874b7-2bb4-429a-8e84-9cc918cb67f6
+	fromColumn: 'public court_case_type_mapping'.court_id
+	toColumn: 'public court'.court_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2a9b3d5a-770a-4634-916b-6353f115949e
+	fromColumn: 'public case_type_variable_mapping'.court_case_type_id
+	toColumn: 'public court_case_type_mapping'.court_case_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 0e504838-df9b-4b92-b8ae-8098aa65d7ba
+	fromColumn: 'public case_type_variable_mapping'.court_fiscal_year_mapping_id
+	toColumn: 'public court_fiscal_year_mapping'.court_fiscal_year_mapping_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship c65cd070-0e63-4711-9eb5-a718398119af
+	fromColumn: 'public case_type_variable_mapping'.variable_id
+	toColumn: 'public variable'.variable_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 36e23827-58a5-4c7b-9b7a-e3faeee2a649
+	fromColumn: 'public category_fiscal_year_month_mapping'.category_fiscal_year_mapping_id
+	toColumn: 'public category_fiscal_year_mapping'.category_fiscal_year_mapping_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 8def4d3d-4d61-4169-ab13-56373e2fb3f9
+	fromColumn: 'public category_fiscal_year_month_mapping'.month_id
+	toColumn: 'public month'.month_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship ef10452f-5ec6-4246-bece-25f0a525107e
+	fromColumn: 'public circuit_civil_case_type_group_mapping'.circuit_civil_case_type_group_id
+	toColumn: 'public circuit_civil_case_type_group'.circuit_civil_case_type_group_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship a57cfb15-84b3-4000-b74c-19581e045de9
+	fromColumn: 'public circuit_civil_case_type_group_mapping'.value_id
+	toColumn: 'public values'.value_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 81b38784-68d0-47e8-b9a3-a5691d9ad297
+	fromColumn: 'public comparison'.court_id
+	toColumn: 'public court'.court_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship c0f4197c-86dc-4d65-95bd-1f86b077d7bf
+	fromColumn: 'public county_circuit_mapping'.county_id
+	toColumn: 'public county'.county_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5db044b5-1fa8-4bdf-94ed-166c0b33c893
+	fromColumn: 'public county_jurisdiction_mapping'.county_id
+	toColumn: 'public county'.county_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4a1f55c5-a063-4c65-9a34-0f6a1dc06298
+	fromColumn: 'public county_jurisdiction_mapping'.jurisdiction_id
+	toColumn: 'public jurisdiction'.jurisdiction_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 75e1d2e2-4e09-4f83-9bad-e21e98bb81df
+	fromColumn: 'public court'.category_id
+	toColumn: 'public category'.category_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship e846dc14-5869-4196-a890-40da8c22d858
+	isActive: false
+	fromColumn: 'public court_fiscal_year_mapping'.court_id
+	toColumn: 'public court'.court_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship c8e8c86c-6601-41af-b4ef-b49c558030a9
+	fromColumn: 'public court_variable_mapping'.court_fiscal_year_mapping_id
+	toColumn: 'public court_fiscal_year_mapping'.court_fiscal_year_mapping_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship b3954776-b02a-4783-a45c-988bc097f816
+	fromColumn: 'public court_variable_mapping'.variable_id
+	toColumn: 'public variable'.variable_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 878af735-b593-4809-b934-3d0a12d1d846
+	isActive: false
+	fromColumn: 'public dashboard_data'.category_fiscal_year_month_mapping_id
+	toColumn: 'public category_fiscal_year_month_mapping'.category_fiscal_year_month_mapping_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 67ddc553-e287-4337-9050-f17b584397bf
+	fromColumn: 'public data_upload_history'.data_upload_id
+	toColumn: 'public data_upload'.data_upload_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship aa1f3d8c-b7ec-4f30-b827-40007941fd6c
+	isActive: false
+	fromColumn: 'public data_upload_history'.file_id
+	toColumn: 'public file'.file_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship dff522f7-234c-4db1-9238-0ebf2294dedb
+	fromColumn: 'public file'.account_id
+	toColumn: 'public account'.account_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship efd8440f-e938-446a-9cee-4db5dc450ef4
+	fromColumn: 'public filter'.category_id
+	toColumn: 'public category'.category_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship b06a0c5f-b211-41d5-9881-ef1e0b7645af
+	isActive: false
+	fromColumn: 'public filter'.court_id
+	toColumn: 'public court'.court_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship c5f6283f-ded9-4e41-a2bd-3ca61b4e3d16
+	fromColumn: 'public filter'.view_type_id
+	toColumn: 'public view_type'.view_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 41675606-a2b1-418f-a84a-7bccacc78326
+	fromColumn: 'public filter_case_type_mapping'.court_case_type_id
+	toColumn: 'public court_case_type_mapping'.court_case_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3237d09d-70f0-439e-97b9-34fc5961f32e
+	isActive: false
+	fromColumn: 'public filter_case_type_mapping'.court_id
+	toColumn: 'public court'.court_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship b525d1e2-8d3e-4a43-8da4-165294006da1
+	fromColumn: 'public filter_filing_by'.court_id
+	toColumn: 'public court'.court_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship fe2dc9f6-afa2-455d-9992-1759db4cb819
+	fromColumn: 'public filter_options'.filter_id
+	toColumn: 'public filter'.filter_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 11f47e15-fb54-49a9-8725-42d58ac5e838
+	fromColumn: 'public filter_values_mapping'.filter_id
+	toColumn: 'public filter'.filter_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship c5de2cdf-ac5a-44e4-a51e-51e990e62878
+	fromColumn: 'public filter_values_mapping'.value_id
+	toColumn: 'public values'.value_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship aa8e91da-bd82-44b3-a38d-9bbea988df36
+	fromColumn: 'public footnotes'.category_fiscal_year_mapping_id
+	toColumn: 'public category_fiscal_year_mapping'.category_fiscal_year_mapping_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 00a1a923-3020-4c43-832e-a5771897c32b
+	fromColumn: 'public footnotes'.data_upload_id
+	toColumn: 'public data_upload'.data_upload_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship e7ad045e-09f2-4c75-bc82-a3961873c4bd
+	fromColumn: 'public footnotes'.value_id
+	toColumn: 'public values'.value_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 7d3c857f-e9ca-401a-b71e-a910ed7fc92d
+	fromColumn: 'public footnotes'.variable_id
+	toColumn: 'public variable'.variable_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6377704f-374e-4b32-8810-7495322cac8b
+	fromColumn: 'public jwt'.account_id
+	toColumn: 'public account'.account_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship c2841146-c7f1-41ec-911e-76a7ac107b97
+	isActive: false
+	fromColumn: 'public variable'.court_id
+	toColumn: 'public court'.court_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 878fc1ca-18ab-4687-8939-46f9a565ce1b
+	fromColumn: 'public variable'.value_type_id
+	toColumn: 'public value_type'.value_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship f3b0e671-c931-48ca-a41c-9e5881273c0f
+	fromColumn: 'public variable'.view_type_id
+	toColumn: 'public view_type'.view_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship a06e5c02-7704-4886-b0a4-f09ccbc38e4a
+	fromColumn: 'public variable_case_type_mapping'.court_case_type_id
+	toColumn: 'public court_case_type_mapping'.court_case_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 582ecca7-55b1-4239-b12c-166c13dee294
+	fromColumn: 'public variable_case_type_mapping'.variable_id
+	toColumn: 'public variable'.variable_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship b169343f-a227-404f-b011-e419aabd2a51
+	isActive: false
+	fromColumn: 'public variable_case_type_mapping'.view_type_id
+	toColumn: 'public view_type'.view_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1aedb038-50b4-4c5f-bea2-309dad2f99be
+	fromColumn: 'public variable_county_jurisdiction_mapping'.county_jurisdiction_mapping_id
+	toColumn: 'public county_jurisdiction_mapping'.county_jurisdiction_mapping_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4ed9fde9-ad87-4f27-8899-58c7fe4ed4d9
+	fromColumn: 'public variable_county_jurisdiction_mapping'.variable_id
+	toColumn: 'public variable'.variable_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship c0c396ba-701b-458c-a58f-901b94993e68
+	fromColumn: 'public variable_filing_by_mapping'.court_case_type_id
+	toColumn: 'public court_case_type_mapping'.court_case_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship b7c2065a-aefe-4029-bb79-7807d6e3ddce
+	fromColumn: 'public variable_filing_by_mapping'.variable_id
+	toColumn: 'public variable'.variable_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 38c8e3aa-0c66-49c7-9209-2ea94091f7d1
+	isActive: false
+	fromColumn: 'public variable_filing_by_mapping'.view_type_id
+	toColumn: 'public view_type'.view_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship aec0a12b-53d3-4475-ba39-0b7409e5da38
+	fromColumn: 'public variable_value_type_mapping'.value_type_id
+	toColumn: 'public value_type'.value_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 77328621-5122-4625-a792-28c866d4b774
+	isActive: false
+	fromColumn: 'public variable_value_type_mapping'.variable_id
+	toColumn: 'public variable'.variable_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 7ed9bd93-6688-49e2-910b-1dea6f89e94d
+	fromColumn: 'public variable_values_mapping'.value_id
+	toColumn: 'public values'.value_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 76e3d810-169c-49fe-aea1-2c454e263939
+	fromColumn: 'public variable_values_mapping'.variable_id
+	toColumn: 'public variable'.variable_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3bd377ae-21cc-9a6f-668d-dad7728d0713
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: 'public dashboard_data'.value_id
+	toColumn: 'public values'.value_id
+
+relationship d0380de7-906a-2cf8-84d7-6d82f052f126
+	fromColumn: 'public dashboard_data'.county_id
+	toColumn: 'public county_district_mapping'.county_id
+
+relationship 19234cf9-cae4-dc44-1052-cdbfca9891e7
+	fromColumn: 'public county_district_mapping'.district_id
+	toColumn: 'public district'.district_id
+

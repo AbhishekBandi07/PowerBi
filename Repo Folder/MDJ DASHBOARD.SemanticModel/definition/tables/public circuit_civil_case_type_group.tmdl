@@ -1,0 +1,77 @@
+table 'public circuit_civil_case_type_group'
+	lineageTag: 961549a5-abd3-471b-90da-fc9502f05fe5
+
+	column circuit_civil_case_type_group_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f917032d-0e35-4ea1-beac-a287fa7d8337
+		summarizeBy: none
+		sourceColumn: circuit_civil_case_type_group_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 6c6adea4-2caf-48f1-abd9-1c48fa1fed98
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 2933146a-503b-493b-adde-8f8e43e803d8
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 6b1b17f8-b4d5-42e1-9837-d661ddc98b6c
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: f5b331f2-c18a-4412-8f99-00b6fe074c48
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: e142d6fc-55e6-45f8-bc23-251c68bebf8f
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public circuit_civil_case_type_group' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_circuit_civil_case_type_group = Source{[Schema="public",Item="circuit_civil_case_type_group"]}[Data]
+				in
+				    public_circuit_civil_case_type_group
+
+	annotation PBI_ResultType = Table
+

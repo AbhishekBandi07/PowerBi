@@ -1,0 +1,42 @@
+relationship 3e731d7e-a174-8e26-8fd0-27fd7c593440
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DIM_CUSTOMER_LOCATION.CUSTOMER_ID
+	toColumn: FACT_ORDER_ANALYSIS.CUSTOMER_ID
+
+relationship 45a3fcc6-e681-c6be-c438-e4a03541dab2
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DIM_ORDER_STATUS.ORDER_ID
+	toColumn: FACT_ORDER_ANALYSIS.ORDER_ID
+
+relationship 8934f122-cd32-8799-7761-49f1c2f8c1c7
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DIM_ORDER_TIME.TIME_ID
+	toColumn: FACT_ORDER_ANALYSIS.TIME_ID
+
+relationship 9dc93639-6d7b-bd52-353f-b235025afeb7
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DIM_PAYMENTS.ORDER_ID
+	toColumn: FACT_ORDER_ANALYSIS.ORDER_ID
+
+relationship 3a9e8bb0-5fe8-18c6-daa6-8233ffb2143a
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: DIM_ORDER_TIME.YEAR
+	toColumn: DateTable.Year
+
+relationship ab908d95-6268-30e5-49f4-ff049e0cbf50
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: DIM_PRODUCT_CATEGORY.PRODUCT_CATEGORY_NAME
+	toColumn: FACT_ORDER_ANALYSIS.PRODUCT_CATEGORY_NAME
+
+relationship 548b820e-ef32-d08a-5c22-ee12e32501b4
+	crossFilteringBehavior: bothDirections
+	fromColumn: FACT_ORDER_ANALYSIS.CUSTOMER_ID
+	toColumn: DIM_CUSTOMER_BEHAVIOR.CUSTOMER_ID
+

@@ -1,0 +1,111 @@
+table 'public footnotes'
+	lineageTag: d982973a-494e-4cb8-bae6-05f3079816bc
+
+	column footnotes_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 38c3f428-6e3a-420a-b662-91a839c2406d
+		summarizeBy: sum
+		sourceColumn: footnotes_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: b0d545c0-2560-47e9-8bc4-7045b389e0ff
+		summarizeBy: none
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1dc7819f-e384-4963-bead-539d38f526f9
+		summarizeBy: none
+		sourceColumn: value_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f27ea8da-8546-4628-92ef-6dd5617dc21f
+		summarizeBy: none
+		sourceColumn: variable_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_fiscal_year_mapping_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 52eba96a-5322-4bba-a1f8-540938cae88f
+		summarizeBy: none
+		sourceColumn: category_fiscal_year_mapping_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_upload_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3e334cad-1842-4323-bb8a-aee8c0044197
+		summarizeBy: none
+		sourceColumn: data_upload_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: b96236da-b8ef-4aab-b621-36f06d64bfbe
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 5898a47e-58fc-401f-8f9a-fd5c6946ae45
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: cf2482b7-6503-4513-a314-5b29f7fc9b66
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public footnotes' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_footnotes = Source{[Schema="public",Item="footnotes"]}[Data]
+				in
+				    public_footnotes
+
+	annotation PBI_ResultType = Table
+

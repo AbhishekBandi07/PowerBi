@@ -1,0 +1,78 @@
+table 'public comissioner_data_duration_filter'
+	lineageTag: 27188d95-25b9-4385-9de6-921bc389487c
+
+	column comissioner_data_duration_filter_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ce79d049-c612-4b55-87bd-5f94550cf35a
+		summarizeBy: sum
+		sourceColumn: comissioner_data_duration_filter_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 373a7b7a-f4e4-42fe-a87c-c927aba0c38d
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 29610b9e-2abd-43b7-a3cf-d3edd8653396
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 102d06a5-e2e0-44d4-92bb-a29c593c3532
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: f890ca6d-dc0b-4c68-bfc1-fedb47b1067f
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 2d604436-0f2e-4ecf-b2e1-ea4a03e95a43
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public comissioner_data_duration_filter' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_comissioner_data_duration_filter = Source{[Schema="public",Item="comissioner_data_duration_filter"]}[Data]
+				in
+				    public_comissioner_data_duration_filter
+
+	annotation PBI_ResultType = Table
+

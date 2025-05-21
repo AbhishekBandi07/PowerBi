@@ -1,0 +1,100 @@
+table 'public category'
+	lineageTag: 8ebbf6b4-aa8b-4bee-90cc-5333e85cca68
+
+	column category_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e459bf9a-c0f0-4d94-a538-b58a49b6bdf2
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: f2915f15-0dc1-4cd6-b357-c1752182d56e
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3fd4275a-de14-4cf2-b952-ab9c233bf6eb
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 94475f4c-cfb8-4919-818a-6d1fa99da06e
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: bc4f9dae-086b-4eea-b27d-29bb2ecaaee8
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: c0dc73e3-5c23-4363-adef-0f55e1aa99e3
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column parent_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: aed291bc-9ab8-4f25-bb20-5df561ec0305
+		summarizeBy: sum
+		sourceColumn: parent_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sort_order
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e04bb421-e2ac-4977-844a-a764d9c8a3a2
+		summarizeBy: sum
+		sourceColumn: sort_order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public category' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_category = Source{[Schema="public",Item="category"]}[Data]
+				in
+				    public_category
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

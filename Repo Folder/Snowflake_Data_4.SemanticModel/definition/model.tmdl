@@ -1,0 +1,27 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DIM_CUSTOMER_BEHAVIOR","DIM_CUSTOMER_LOCATION","DIM_ORDER_STATUS","DIM_ORDER_TIME","DIM_PAYMENTS","DIM_PRODUCT_CATEGORY","FACT_ORDER_ANALYSIS","SOURCE_ORDERS"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop"]
+
+ref table DIM_CUSTOMER_BEHAVIOR
+ref table DIM_CUSTOMER_LOCATION
+ref table DIM_ORDER_STATUS
+ref table DIM_ORDER_TIME
+ref table DIM_PAYMENTS
+ref table DIM_PRODUCT_CATEGORY
+ref table FACT_ORDER_ANALYSIS
+ref table SOURCE_ORDERS
+
+ref cultureInfo en-US
+

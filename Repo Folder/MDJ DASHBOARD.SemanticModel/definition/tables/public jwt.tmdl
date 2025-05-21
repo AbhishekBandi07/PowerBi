@@ -1,0 +1,79 @@
+table 'public jwt'
+	lineageTag: 4e3a5d98-e98d-4ca2-a581-1283187717e6
+
+	column jwt_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0f1d481a-0b72-4bc5-ab27-1cbbe8aa26b8
+		summarizeBy: sum
+		sourceColumn: jwt_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b86a6086-4d38-4240-a694-b986d54cc5da
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column token
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: 36c422c4-0c56-4a7b-8ae4-a9161afaca5b
+		summarizeBy: none
+		sourceColumn: token
+
+		annotation SummarizationSetBy = Automatic
+
+	column revoked
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 7450bb50-14d3-4fad-b18b-cb69f1728030
+		summarizeBy: none
+		sourceColumn: revoked
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 441e9e26-dbad-40bc-83a0-c9bd3b3ebb3a
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: ad7e8542-007f-4b39-a8a8-1aa11efd412b
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public jwt' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_jwt = Source{[Schema="public",Item="jwt"]}[Data]
+				in
+				    public_jwt
+
+	annotation PBI_ResultType = Table
+

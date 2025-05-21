@@ -1,0 +1,89 @@
+table 'public comparison'
+	lineageTag: a3a82af3-2de3-4bde-8a8b-920508c6b433
+
+	column comparison_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9978cde1-5a8d-4f3f-a400-754a8842fa7d
+		summarizeBy: sum
+		sourceColumn: comparison_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: ee80456a-d286-4ab3-b9d9-15f95b8df6d4
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: a30b46ae-c85c-4423-b4f2-de02640df17c
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_id
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: cbb35288-fd7f-4566-89c1-068e295b4ef9
+		summarizeBy: none
+		sourceColumn: court_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		isNullable: false
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 4bf498d5-45a9-44cd-ad99-aeb188234313
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 16d6dd5b-3d22-4e41-9874-11346739e6f9
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		isNullable: false
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 36d1b7da-62f2-4d21-8dd9-b84ccffd0d12
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public comparison' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Power Bi"),
+				    public_comparison = Source{[Schema="public",Item="comparison"]}[Data]
+				in
+				    public_comparison
+
+	annotation PBI_ResultType = Table
+

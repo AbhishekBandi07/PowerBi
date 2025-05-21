@@ -1,0 +1,62 @@
+table DIM_PRODUCT_CATEGORY
+	lineageTag: c3dc31fe-3024-4511-ac4e-82e60b253fb7
+
+	column PRODUCT_CATEGORY_NAME
+		dataType: string
+		lineageTag: ecad7449-2ac8-4c6c-a4cb-7d7032bc8ff3
+		summarizeBy: none
+		sourceColumn: PRODUCT_CATEGORY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ORDERS
+		dataType: double
+		lineageTag: 1f2d112e-c6af-4ae9-9055-0d3f24a053d8
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDERS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_REVENUE
+		dataType: double
+		lineageTag: eb63778b-97c3-4e9f-9dad-85fc1b61bae7
+		summarizeBy: sum
+		sourceColumn: TOTAL_REVENUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_SHIPPING_CHARGES
+		dataType: double
+		lineageTag: c56cf071-1edc-4a7f-a6d4-97fca988dd6a
+		summarizeBy: sum
+		sourceColumn: AVERAGE_SHIPPING_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMBINED_ROW_HASH
+		dataType: string
+		lineageTag: 65a3cbd8-6274-4db8-b4a5-dea6739d7772
+		summarizeBy: none
+		sourceColumn: COMBINED_ROW_HASH
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PRODUCT_CATEGORY = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.DataSource("dsn=Snowflake_Data_2", [HierarchicalNavigation=true]),
+				    CUSTOMERS_DB_Database = Source{[Name="CUSTOMERS_DB",Kind="Database"]}[Data],
+				    CUSTOMERS_SCHEMA_Schema = CUSTOMERS_DB_Database{[Name="CUSTOMERS_SCHEMA",Kind="Schema"]}[Data],
+				    DIM_PRODUCT_CATEGORY_Table = CUSTOMERS_SCHEMA_Schema{[Name="DIM_PRODUCT_CATEGORY",Kind="Table"]}[Data]
+				in
+				    DIM_PRODUCT_CATEGORY_Table
+
+	annotation PBI_ResultType = Table
+

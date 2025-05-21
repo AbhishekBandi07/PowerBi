@@ -1,0 +1,24 @@
+table Business_Related_Workload
+	lineageTag: 281f08ac-c08e-45ec-b942-32fc814e2310
+
+	column Case_Type
+		dataType: string
+		lineageTag: 748fa4aa-66cc-4dec-b6c2-8b9f8c811845
+		summarizeBy: none
+		sourceColumn: Case_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Business_Related_Workload = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bZBBTwJBDIX/SrNnD4SDdyQxwSxC9LhyKDNdaMJMTds5+O+dhWE1xmv73uv3OgxdjznCJptrSZQd3iiIxu7wMHQvRUXhvaQk2WCLfKHb4qkYZzKDngNlI4O9cnaK8FEWi+UjrFlDuaA3/WtJR1KQEf46214c9QvWpM4jB3SeDrasVfFzBbuPr4YtqjKe6JflCiGhZrfQWTOdChWydYonmorO+T1XEHiey+3QzwarmDizOelPqzumpMRm/8JQfRVPKKSjaGqRezT7FPWqP3wD", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Case_Type = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Case_Type", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
