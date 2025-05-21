@@ -1,19 +1,52 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+  branches:
+    include:
+      - Test-1
+
+variables:
+  - group: Access for git
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.x'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: PowerShell@2
+  displayName: 'Install Power BI PowerShell Modules'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Install-Module -Name MicrosoftPowerBIMgmt -Force -Scope CurrentUser -AllowClobber
+
+- task: PowerShell@2
+  displayName: 'Deploy PBIX to Power BI Workspace'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $ErrorActionPreference = "Stop"
+
+      $tenantId = "$(TENANT_ID)"
+      $clientId = "$(CLIENT_ID)"
+      $clientSecret = "$(CLIENT_SECRET)"
+      $workspaceName = "$(WORKSPACE_NAME)"
+      $pbixPath = "$(Build.SourcesDirectory)\Report.pbix"  # Update if file is in subfolder
+      $datasetName = "Healthcare Report"
+
+      # Authenticate with Service Principal
+      $securePassword = ConvertTo-SecureString $clientSecret -AsPlainText -Force
+      $credential = New-Object System.Management.Automation.PSCredential($clientId, $securePassword)
+
+      Connect-PowerBIServiceAccount -ServicePrincipal -Credential $credential -Tenant $tenantId
+
+      # Get Workspace
+      $workspace = Get-PowerBIWorkspace -Name $workspaceName
+      if (-not $workspace) {
+          throw "Workspace '$workspaceName' not found."
+      }
+
+      # Import PBIX
+      Import-PowerBIReport -Path $pbixPath -WorkspaceId $workspace.Id -Name $datasetName -ConflictAction CreateOrOverwrite
