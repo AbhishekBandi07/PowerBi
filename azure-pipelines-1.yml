@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - Test-1  # Adjust based on your branch
+      - Test-1
 
 pool:
   vmImage: 'windows-latest'
@@ -9,15 +9,15 @@ pool:
 variables:
   PBI_TENANT_ID: 'b8b38bb6-d128-4ce2-bc75-832204613f0d'
   PBI_CLIENT_ID: 'efb69f03-2d77-4386-a4db-0c7165e80ee2'
-  PBI_WORKSPACE_ID_DEV: '37df8aca-f85c-4d90-a62e-4b7d976c1f82'
-  PBIX_PATH: 'report.pbix'  # Update this if your PBIX file has a different name or path
+  PBI_WORKSPACE_ID_TEST: '8cadcdf4-a1be-4734-bd6e-1164f919d502'
+  PBIX_PATH: 'MDJ DASHBOARD.pbix'  # 🟢 File name exactly as in your GitHub repo
 
 steps:
 
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '6.0.x'  # Required for latest Power BI modules
+    version: '6.0.x'
 
 - task: PowerShell@2
   displayName: 'Install Power BI Modules'
@@ -28,14 +28,14 @@ steps:
       Install-Module -Name MicrosoftPowerBIMgmt.Profile -Force -Scope CurrentUser
 
 - task: PowerShell@2
-  displayName: 'Deploy PBIX to Power BI Dev Workspace'
+  displayName: 'Deploy PBIX to Power BI Test Workspace'
   inputs:
     targetType: 'inline'
     script: |
       $tenantId = "$(PBI_TENANT_ID)"
       $clientId = "$(PBI_CLIENT_ID)"
-      $workspaceId = "$(PBI_WORKSPACE_ID_DEV)"
-      $clientSecret = "$(PBI_CLIENT_SECRET)"  # This must be set as a secret variable in DevOps
+      $workspaceId = "$(PBI_WORKSPACE_ID_TEST)"
+      $clientSecret = "$(PBI_CLIENT_SECRET)"  # ❗ Set this in pipeline variables as a secret
       $pbixPath = "$(PBIX_PATH)"
 
       $secureSecret = ConvertTo-SecureString $clientSecret -AsPlainText -Force
@@ -44,4 +44,4 @@ steps:
       Connect-PowerBIServiceAccount -ServicePrincipal -Credential $credential -TenantId $tenantId
 
       Write-Host "Uploading PBIX file..."
-      New-PowerBIReport -Path $pbixPath -WorkspaceId $workspaceId -Name "CI/CD Report" -ConflictAction CreateOrOverwrite
+      New-PowerBIReport -Path $pbixPath -WorkspaceId $workspaceId -Name "MDJ Dashboard" -ConflictAction CreateOrOverwrite
