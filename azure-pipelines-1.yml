@@ -26,9 +26,10 @@ steps:
     targetType: 'inline'
     script: |
       $pbixUrl = "https://raw.githubusercontent.com/AbhishekBandi07/PowerBi/Test-1/MDJ%20DASHBOARD.pbix"
-      $outputPath = "$(Build.SourcesDirectory)/$(PBIX_FILE_NAME)"
+      $outputPath = "$(Build.SourcesDirectory)/MDJ DASHBOARD.pbix"
       Invoke-WebRequest -Uri $pbixUrl -OutFile $outputPath
       Write-Host "PBIX file downloaded to: $outputPath"
+
 
 # ✅ Install Power BI modules if not already present
 - task: PowerShell@2
