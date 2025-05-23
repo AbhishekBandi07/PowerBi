@@ -25,7 +25,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $pbixUrl = "https://github.com/AbhishekBandi07/PowerBi/blob/Test-1/MDJ%20DASHBOARD.pbix"
+      $pbixUrl = "https://raw.githubusercontent.com/AbhishekBandi07/PowerBi/55453af3c828e3500aef1b590e23304014635877/MDJ%20DASHBOARD.pbix"
       $outputPath = "$(Build.SourcesDirectory)/MDJ DASHBOARD.pbix"
       Invoke-WebRequest -Uri $pbixUrl -OutFile $outputPath
       Write-Host "PBIX file downloaded to: $outputPath"
