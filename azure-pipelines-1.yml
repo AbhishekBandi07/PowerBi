@@ -10,7 +10,7 @@ variables:
   PBI_TENANT_ID: 'b8b38bb6-d128-4ce2-bc75-832204613f0d'
   PBI_CLIENT_ID: 'efb69f03-2d77-4386-a4db-0c7165e80ee2'
   PBI_WORKSPACE_ID_TEST: '8cadcdf4-a1be-4734-bd6e-1164f919d502'
-  PBIX_PATH: 'https://github.com/AbhishekBandi07/PowerBi/blob/Test-1/MDJ%20DASHBOARD.pbix'  # 🟢 File name exactly as in your GitHub repo
+  PBIX_FILE_NAME: 'MDJ DASHBOARD.pbix'
 
 steps:
 
@@ -19,14 +19,30 @@ steps:
     packageType: 'sdk'
     version: '6.0.x'
 
+# ✅ Download PBIX from GitHub
 - task: PowerShell@2
-  displayName: 'Install Power BI Modules'
+  displayName: 'Download PBIX from GitHub'
   inputs:
     targetType: 'inline'
     script: |
-      Install-Module -Name MicrosoftPowerBIMgmt -Force -Scope CurrentUser
-      Install-Module -Name MicrosoftPowerBIMgmt.Profile -Force -Scope CurrentUser
+      $pbixUrl = "https://raw.githubusercontent.com/AbhishekBandi07/PowerBi/Test-1/MDJ%20DASHBOARD.pbix"
+      $outputPath = "$(Build.SourcesDirectory)/$(PBIX_FILE_NAME)"
+      Invoke-WebRequest -Uri $pbixUrl -OutFile $outputPath
+      Write-Host "PBIX file downloaded to: $outputPath"
 
+# ✅ Install Power BI modules if not already present
+- task: PowerShell@2
+  displayName: 'Install Power BI Modules (if not already)'
+  inputs:
+    targetType: 'inline'
+    script: |
+      if (-not (Get-Module -ListAvailable -Name MicrosoftPowerBIMgmt)) {
+        Install-Module -Name MicrosoftPowerBIMgmt -Force -Scope CurrentUser
+      } else {
+        Write-Host "Power BI modules already present. Skipping install."
+      }
+
+# 🚀 Deploy the PBIX to Power BI Test workspace
 - task: PowerShell@2
   displayName: 'Deploy PBIX to Power BI Test Workspace'
   inputs:
@@ -35,13 +51,13 @@ steps:
       $tenantId = "$(PBI_TENANT_ID)"
       $clientId = "$(PBI_CLIENT_ID)"
       $workspaceId = "$(PBI_WORKSPACE_ID_TEST)"
-      $clientSecret = "$(PBI_CLIENT_SECRET)"  # ❗ Set this in pipeline variables as a secret
-      $pbixPath = "$(PBIX_PATH)"
+      $clientSecret = "$(PBI_CLIENT_SECRET)"  # ❗ Make sure this is defined as a secret variable
+      $pbixPath = "$(Build.SourcesDirectory)/$(PBIX_FILE_NAME)"
 
       $secureSecret = ConvertTo-SecureString $clientSecret -AsPlainText -Force
       $credential = New-Object System.Management.Automation.PSCredential($clientId, $secureSecret)
 
       Connect-PowerBIServiceAccount -ServicePrincipal -Credential $credential -TenantId $tenantId
 
-      Write-Host "Uploading PBIX file..."
+      Write-Host "Uploading PBIX file: $pbixPath"
       New-PowerBIReport -Path $pbixPath -WorkspaceId $workspaceId -Name "MDJ Dashboard" -ConflictAction CreateOrOverwrite
